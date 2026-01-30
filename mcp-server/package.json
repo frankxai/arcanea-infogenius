@@ -1,0 +1,57 @@
+{
+  "name": "arcanea-infogenius-mcp",
+  "version": "1.0.0",
+  "description": "Advanced MCP server for Arcanea InfoGenius Pro - Guardian AI enhanced visual generation",
+  "main": "dist/index.js",
+  "type": "module",
+  "bin": {
+    "arcanea-infogenius-mcp": "./dist/index.js"
+  },
+  "files": [
+    "dist/",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsx src/index.ts",
+    "test": "jest",
+    "lint": "eslint src/**/*.ts",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run build && npm run typecheck"
+  },
+  "keywords": [
+    "mcp",
+    "arcanea",
+    "infogenius",
+    "guardian-ai",
+    "oracle",
+    "visual-generation",
+    "claude-code",
+    "gemini",
+    "transcendent-ai"
+  ],
+  "author": "Arcanea Systems - Enhanced with Guardian AI Intelligence",
+  "license": "MIT",
+  "dependencies": {
+    "@google/genai": "^1.16.0",
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "dotenv": "^16.4.5",
+    "zod": "^3.22.4",
+    "node-fetch": "^3.3.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@typescript-eslint/eslint-plugin": "^6.19.0",
+    "@typescript-eslint/parser": "^6.19.0",
+    "eslint": "^8.56.0",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.3",
+    "jest": "^29.7.0",
+    "@types/jest": "^29.5.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

@@ -1,0 +1,43 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+build/
+
+# Generated images
+docs/images/*.png
+docs/images/*.jpg
+docs/images/*.jpeg
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Cache
+.cache/
+*.cache/
+
+# Test coverage
+coverage/
+
+# Misc
+*.pem
+*.key
+.eslintcache

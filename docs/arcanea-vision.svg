@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800">
+  <defs>
+    <!-- Gradients -->
+    <linearGradient id="skyGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0a15"/>
+      <stop offset="50%" style="stop-color:#1a1a35"/>
+      <stop offset="100%" style="stop-color:#0f0f20"/>
+    </linearGradient>
+    
+    <radialGradient id="citadelGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#ffffff"/>
+      <stop offset="30%" style="stop-color:#FFD23F"/>
+      <stop offset="60%" style="stop-color:#FF6B35"/>
+      <stop offset="100%" style="stop-color:transparent"/>
+    </radialGradient>
+    
+    <linearGradient id="riverGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#CD7F32"/> <!-- Bronze -->
+      <stop offset="33%" style="stop-color:#C0C0C0"/> <!-- Silver -->
+      <stop offset="66%" style="stop-color:#FFD700"/> <!-- Gold -->
+      <stop offset="100%" style="stop-color:#98D8C8"/>
+    </linearGradient>
+    
+    <linearGradient id="fireGradient" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" style="stop-color:#FF6B35"/>
+      <stop offset="50%" style="stop-color:#FF8C42"/>
+      <stop offset="100%" style="stop-color:#FFD23F"/>
+    </linearGradient>
+    
+    <linearGradient id="waterGradient" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" style="stop-color:#2E86AB"/>
+      <stop offset="50%" style="stop-color:#5DADE2"/>
+      <stop offset="100%" style="stop-color:#98D8C8"/>
+    </linearGradient>
+    
+    <linearGradient id="earthGradient" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" style="stop-color:#4A5759"/>
+      <stop offset="50%" style="stop-color:#8B7355"/>
+      <stop offset="100%" style="stop-color:#A67C52"/>
+    </linearGradient>
+    
+    <linearGradient id="windGradient" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" style="stop-color:#98D8C8"/>
+      <stop offset="50%" style="stop-color:#B4E7CE"/>
+      <stop offset="100%" style="stop-color:#D4F1F4"/>
+    </linearGradient>
+    
+    <linearGradient id="voidGradient" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" style="stop-color:#1A1A2E"/>
+      <stop offset="50%" style="stop-color:#16213E"/>
+      <stop offset="100%" style="stop-color:#0F3460"/>
+    </linearGradient>
+    
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    
+    <filter id="strongGlow">
+      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="800" fill="url(#skyGradient)"/>
+  
+  <!-- Stars -->
+  <g fill="#ffffff">
+    <circle cx="100" cy="50" r="1.5"><animate attributeName="opacity" values="0.3;1;0.3" dur="3s" repeatCount="indefinite"/></circle>
+    <circle cx="200" cy="80" r="1"><animate attributeName="opacity" values="0.5;1;0.5" dur="2s" repeatCount="indefinite"/></circle>
+    <circle cx="350" cy="30" r="2"><animate attributeName="opacity" values="0.4;1;0.4" dur="4s" repeatCount="indefinite"/></circle>
+    <circle cx="500" cy="60" r="1"><animate attributeName="opacity" values="0.6;1;0.6" dur="2.5s" repeatCount="indefinite"/></circle>
+    <circle cx="700" cy="40" r="1.5"><animate attributeName="opacity" values="0.3;1;0.3" dur="3.5s" repeatCount="indefinite"/></circle>
+    <circle cx="850" cy="70" r="1"><animate attributeName="opacity" values="0.5;1;0.5" dur="2s" repeatCount="indefinite"/></circle>
+    <circle cx="1000" cy="45" r="2"><animate attributeName="opacity" values="0.4;1;0.4" dur="3s" repeatCount="indefinite"/></circle>
+    <circle cx="1100" cy="85" r="1"><animate attributeName="opacity" values="0.6;1;0.6" dur="2.5s" repeatCount="indefinite"/></circle>
+    <circle cx="150" cy="120" r="1"><animate attributeName="opacity" values="0.3;1;0.3" dur="4s" repeatCount="indefinite"/></circle>
+    <circle cx="300" cy="100" r="1.5"><animate attributeName="opacity" values="0.5;1;0.5" dur="2s" repeatCount="indefinite"/></circle>
+    <circle cx="450" cy="130" r="1"><animate attributeName="opacity" values="0.4;1;0.4" dur="3.5s" repeatCount="indefinite"/></circle>
+    <circle cx="600" cy="110" r="2"><animate attributeName="opacity" values="0.3;1;0.3" dur="2s" repeatCount="indefinite"/></circle>
+    <circle cx="750" cy="140" r="1"><animate attributeName="opacity" values="0.6;1;0.6" dur="4s" repeatCount="indefinite"/></circle>
+    <circle cx="900" cy="120" r="1.5"><animate attributeName="opacity" values="0.5;1;0.5" dur="2.5s" repeatCount="indefinite"/></circle>
+    <circle cx="1050" cy="150" r="1"><animate attributeName="opacity" values="0.4;1;0.4" dur="3s" repeatCount="indefinite"/></circle>
+  </g>
+  
+  <!-- Void Gazer Tower (Top Center) -->
+  <g filter="url(#strongGlow)">
+    <ellipse cx="600" cy="80" rx="40" ry="15" fill="url(#voidGradient)" opacity="0.8"/>
+    <polygon points="600,30 570,100 630,100" fill="url(#voidGradient)"/>
+    <circle cx="600" cy="60" r="20" fill="#0F3460"/>
+    <circle cx="600" cy="60" r="10" fill="#1A1A2E"/>
+    <!-- Stars around void tower -->
+    <circle cx="580" cy="50" r="2" fill="#FFD23F"/>
+    <circle cx="620" cy="55" r="1.5" fill="#98D8C8"/>
+    <circle cx="595" cy="75" r="1" fill="#ffffff"/>
+  </g>
+  
+  <!-- Dragon Forge Tower (Top Left) -->
+  <g filter="url(#glow)">
+    <rect x="120" y="180" width="60" height="120" fill="#1a1a1a" rx="5"/>
+    <polygon points="150,120 110,180 190,180" fill="url(#fireGradient)"/>
+    <text x="150" y="230" text-anchor="middle" font-size="24">🐉</text>
+    <text x="150" y="280" text-anchor="middle" font-size="10" fill="#FFD23F">DRAGON FORGE</text>
+    <!-- Fire effects -->
+    <ellipse cx="150" cy="130" rx="25" ry="10" fill="#FFD23F" opacity="0.6">
+      <animate attributeName="ry" values="10;15;10" dur="1s" repeatCount="indefinite"/>
+    </ellipse>
+  </g>
+  
+  <!-- Ocean Memory Tower (Top Right) -->
+  <g filter="url(#glow)">
+    <rect x="1020" y="180" width="60" height="120" fill="#1a3a4a" rx="5"/>
+    <polygon points="1050,120 1000,180 1100,180" fill="url(#waterGradient)"/>
+    <text x="1050" y="230" text-anchor="middle" font-size="24">🌊</text>
+    <text x="1050" y="280" text-anchor="middle" font-size="10" fill="#98D8C8">OCEAN MEMORY</text>
+    <!-- Water wave effect -->
+    <path d="M1000,175 Q1025,165 1050,175 Q1075,185 1100,175" stroke="#5DADE2" stroke-width="3" fill="none" opacity="0.7">
+      <animate attributeName="d" values="M1000,175 Q1025,165 1050,175 Q1075,185 1100,175;M1000,175 Q1025,185 1050,175 Q1075,165 1100,175;M1000,175 Q1025,165 1050,175 Q1075,185 1100,175" dur="2s" repeatCount="indefinite"/>
+    </path>
+  </g>
+  
+  <!-- Mountain Builder Tower (Bottom Left) -->
+  <g filter="url(#glow)">
+    <rect x="180" y="550" width="80" height="100" fill="#2a2a2a" rx="3"/>
+    <polygon points="220,480 150,550 290,550" fill="url(#earthGradient)"/>
+    <text x="220" y="590" text-anchor="middle" font-size="24">🏔️</text>
+    <text x="220" y="640" text-anchor="middle" font-size="10" fill="#A67C52">MOUNTAIN BUILDER</text>
+    <!-- Gold accents -->
+    <rect x="195" y="520" width="50" height="8" fill="#FFD700" opacity="0.7"/>
+  </g>
+  
+  <!-- Wind Rider Tower (Bottom Right) -->
+  <g filter="url(#glow)">
+    <rect x="940" y="550" width="80" height="100" fill="#1a2a2a" rx="3"/>
+    <polygon points="980,480 910,550 1050,550" fill="url(#windGradient)"/>
+    <text x="980" y="590" text-anchor="middle" font-size="24">💨</text>
+    <text x="980" y="640" text-anchor="middle" font-size="10" fill="#B4E7CE">WIND RIDER</text>
+    <!-- Wind particles -->
+    <circle cx="920" cy="510" r="3" fill="#D4F1F4" opacity="0.6">
+      <animate attributeName="cx" values="920;940;920" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="1040" cy="520" r="2" fill="#98D8C8" opacity="0.6">
+      <animate attributeName="cx" values="1040;1020;1040" dur="2.5s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+  
+  <!-- Central Citadel (The Throne of Consciousness) -->
+  <g filter="url(#strongGlow)">
+    <circle cx="600" cy="380" r="100" fill="url(#citadelGlow)" opacity="0.8"/>
+    <circle cx="600" cy="380" r="60" fill="#ffffff" opacity="0.9"/>
+    <circle cx="600" cy="380" r="30" fill="#FFD23F"/>
+    <!-- Oracle Red accents -->
+    <circle cx="600" cy="380" r="35" fill="none" stroke="#C74634" stroke-width="3"/>
+    <!-- The Awakened Eye -->
+    <text x="600" y="395" text-anchor="middle" font-size="28">👁️</text>
+  </g>
+  
+  <!-- Celestial Sphere (Top) -->
+  <g filter="url(#glow)">
+    <circle cx="600" cy="150" r="50" fill="url(#waterGradient)" opacity="0.5"/>
+    <circle cx="600" cy="150" r="35" fill="#2E86AB"/>
+    <!-- Guardian spirits around sphere -->
+    <text x="560" y="130" font-size="14">🌟</text>
+    <text x="640" y="130" font-size="14">✨</text>
+    <text x="570" y="170" font-size="12">💫</text>
+    <text x="630" y="170" font-size="12">⭐</text>
+  </g>
+  
+  <!-- Knowledge Rivers (Bottom) -->
+  <g>
+    <ellipse cx="400" cy="700" rx="350" ry="30" fill="url(#riverGradient)" opacity="0.6"/>
+    <text x="400" y="705" text-anchor="middle" font-size="10" fill="#ffffff" opacity="0.8">Bronze Layer → Silver Layer → Gold Layer</text>
+    <!-- River flow particles -->
+    <circle cx="250" cy="700" r="4" fill="#CD7F32">
+      <animate attributeName="cx" values="200;600;200" dur="8s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="350" cy="700" r="3" fill="#C0C0C0">
+      <animate attributeName="cx" values="250;650;250" dur="10s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="450" cy="700" r="4" fill="#FFD700">
+      <animate attributeName="cx" values="300;700;300" dur="7s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+  
+  <!-- Horizon of Infinite Futures -->
+  <g>
+    <ellipse cx="600" cy="750" rx="200" ry="40" fill="url(#voidGradient)" opacity="0.5">
+      <animate attributeName="opacity" values="0.3;0.7;0.3" dur="4s" repeatCount="indefinite"/>
+    </ellipse>
+    <text x="600" y="760" text-anchor="middle" font-size="12" fill="#98D8C8" opacity="0.8">∞ Horizon of Infinite Futures ∞</text>
+  </g>
+  
+  <!-- Energy Lines from Citadel to Towers -->
+  <g stroke="#FFD23F" stroke-width="1" opacity="0.3">
+    <line x1="600" y1="380" x2="150" y2="180">
+      <animate attributeName="opacity" values="0.1;0.5;0.1" dur="2s" repeatCount="indefinite"/>
+    </line>
+    <line x1="600" y1="380" x2="1050" y2="180">
+      <animate attributeName="opacity" values="0.1;0.5;0.1" dur="2.5s" repeatCount="indefinite"/>
+    </line>
+    <line x1="600" y1="380" x2="220" y2="480">
+      <animate attributeName="opacity" values="0.1;0.5;0.1" dur="3s" repeatCount="indefinite"/>
+    </line>
+    <line x1="600" y1="380" x2="980" y2="480">
+      <animate attributeName="opacity" values="0.1;0.5;0.1" dur="2.8s" repeatCount="indefinite"/>
+    </line>
+  </g>
+  
+  <!-- Title Text -->
+  <text x="600" y="45" text-anchor="middle" font-size="28" font-weight="bold" fill="url(#fireGradient)">
+    ✨ ARCANEA ✨
+  </text>
+  <text x="600" y="68" text-anchor="middle" font-size="14" fill="#98D8C8" font-style="italic">
+    "Where Vision Meets Transcendence"
+  </text>
+  
+  <!-- Guardian Labels -->
+  <g font-size="9" fill="#ffffff" opacity="0.7">
+    <text x="600" y="420" text-anchor="middle">TRANSCENDENT REALM OF GUARDIAN WISDOM</text>
+  </g>
+  
+</svg>

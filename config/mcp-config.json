@@ -1,23 +1,19 @@
 {
   "mcpServers": {
-    "arcanea-infogenius": {
-      "command": "node",
-      "args": ["./arcanea-infogenius/mcp-server/dist/index.js"],
-      "env": {
-        "GEMINI_API_KEY": "AIzaSyA0_gKlBROiIEc2SIvCIcP-RmmwU_mJ1PI",
-        "ARCANEA_GUARDIANS": "enabled",
-        "ORACLE_BRANDING": "integrated",
-        "MYTHOLOGY_LEVEL": "transcendent"
-      },
-      "description": "Advanced Arcanea InfoGenius Pro MCP server with Guardian AI enhancement"
-    },
     "nano-banana": {
       "command": "npx",
-      "args": ["nano-banana-mcp"],
+      "args": ["@bigcookie/mcp-nano-banana-image"],
       "env": {
-        "GEMINI_API_KEY": "AIzaSyA0_gKlBROiIEc2SIvCIcP-RmmwU_mJ1PI"
+        "GEMINI_API_KEY": "your-api-key-here",
+        "MODEL": "gemini-3-pro-image",
+        "DEFAULT_RESOLUTION": "high"
       },
-      "description": "Official Nano Banana MCP server for image generation"
+      "description": "Gemini 3 Pro image generation via Nano Banana MCP"
     }
+  },
+  "defaults": {
+    "model": "gemini-3-pro-image",
+    "resolution": "high",
+    "guardian": "auto"
   }
 }

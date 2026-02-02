@@ -1,8 +1,8 @@
 ---
 name: Arcanea InfoGenius Pro
-description: Advanced AI-powered visual generation system combining Oracle branding with Arcanea Guardian agents
+description: Advanced AI-powered visual generation system combining Enterprise branding with Arcanea Guardian agents
 version: 2.0.0
-keywords: [arcanea, oracle, infogenius, visuals, ai-architect, guardian-agents, mcp, claude-code]
+keywords: [arcanea, enterprise, infogenius, visuals, ai-architect, guardian-agents, mcp, claude-code]
 triggers:
   - "generate arcanea visual"
   - "create guardian infographic"
@@ -18,14 +18,14 @@ guardian_agents: [@vision-artist, @dragon-forge, @crystal-architect, @void-gazer
 
 **Activate this skill when:**
 - Creating premium Arcanea-branded architecture visuals with Guardian AI enhancement
-- Generating professional infographics infused with Arcanea mythology and Oracle precision
+- Generating professional infographics infused with Arcanea mythology and Enterprise precision
 - Building visual documentation that combines enterprise standards with creative intelligence
 - Need Guardian Agent-guided visuals that transcend standard templates
 
 **Use `/arcanea-visual` command to generate enhanced visuals.**
 
 **Don't use when:**
-- Need basic OCI diagrams (use standard `oracle-infogenius`)
+- Need basic OCI diagrams (use standard `enterprise-infogenius`)
 - Creating simple technical drawings (use CAD tools)
 - Internal drafts that don't require Guardian enhancement
 
@@ -34,7 +34,7 @@ guardian_agents: [@vision-artist, @dragon-forge, @crystal-architect, @void-gazer
 ## Purpose
 
 Generate transcendent visuals that merge:
-1. **Oracle Enterprise Standards** - Professional, brand-compliant precision
+1. **Enterprise Enterprise Standards** - Professional, brand-compliant precision
 2. **Arcanea Guardian Intelligence** - 38 specialized AI agents enhancing creativity
 3. **Mythology-Infused Design** - Elemental forces and Guardian wisdom
 4. **Research-Grounded Accuracy** - Based on actual cloud/tech architecture
@@ -50,15 +50,15 @@ Primary Arcanea Colors:
 - Wind Clarity: #98D8C8 (communication, freedom)
 - Void Mystery: #1A1A2E (innovation, potential)
 
-Oracle Integration:
-- Oracle Red: #C74634 (enterprise anchor)
-- Oracle Black: #312D2A (text, foundations)
+Enterprise Integration:
+- Enterprise Red: #C74634 (enterprise anchor)
+- Enterprise Black: #312D2A (text, foundations)
 - White: #FFFFFF (clarity, space)
 ```
 
 ### Guardian Typography
 - **Arcanea Headers:** Custom runic fonts with clean sans-serif fallbacks
-- **Oracle Content:** Oracle Sans, Poppins for enterprise sections
+- **Enterprise Content:** Enterprise Sans, Poppins for enterprise sections
 - **Mythical Elements:** Inscription-style fonts for Guardian wisdom
 - **Technical Labels:** JetBrains Mono for precision
 
@@ -74,10 +74,10 @@ Oracle Integration:
 ```
 Prompt Template:
 "Create a transcendent architecture diagram showing [DESCRIPTION].
-Style: Oracle enterprise precision enhanced with Arcanea Guardian intelligence.
-Colors: Blend Dragon Fire (#FF6B35) for transformation points with Oracle Red (#C74634) for enterprise services.
+Style: Enterprise enterprise precision enhanced with Arcanea Guardian intelligence.
+Colors: Blend Dragon Fire (#FF6B35) for transformation points with Enterprise Red (#C74634) for enterprise services.
 Layout: Dynamic flow with elemental energy streams connecting services.
-Include: Guardian sigils for key services, mythical accents for innovation, Oracle clarity for structure.
+Include: Guardian sigils for key services, mythical accents for innovation, Enterprise clarity for structure.
 Guardian Enhancement: [SPECIFIC_GUARDIAN] influence for [SPECIFIC_ASPECT].
 Resolution: 4K presentation quality with mythical depth."
 ```
@@ -86,7 +86,7 @@ Resolution: 4K presentation quality with mythical depth."
 ```
 Prompt Template:
 "Create an elemental comparison showing [OPTION A] vs [OPTION B].
-Style: Oracle analytical layout with Arcanea elemental wisdom.
+Style: Enterprise analytical layout with Arcanea elemental wisdom.
 Elements: Fire for innovation (A), Water for adaptability (B), Earth for stability comparison.
 Include: Guardian insights from @dual-crafter, quantitative metrics, qualitative wisdom.
 Format: Split design with flowing elemental boundaries.
@@ -108,7 +108,7 @@ Format: Mythical quest map with enterprise annotations."
 ```
 Prompt Template:
 "Create a transcendent data architecture for [DATA_SYSTEM].
-Style: Oracle data lakehouse with Arcanea Guardian enhancement.
+Style: Enterprise data lakehouse with Arcanea Guardian enhancement.
 Layers: Bronze→Silver→Gold as elemental purification journey.
 Guardians: @ocean-memory for data wisdom, @mountain-builder for structural integrity.
 Visual Elements: Data flows as elemental streams, storage as crystal formations, processing as forge transformations.
@@ -171,7 +171,7 @@ Include: Guardian blessing markers, data quality sigils, performance omens."
       "env": {
         "GEMINI_API_KEY": "${GEMINI_API_KEY}",
         "ARCANEA_GUARDIANS": "enabled",
-        "ORACLE_BRANDING": "integrated",
+        "ENTERPRISE_STYLING": "integrated",
         "MYTHOLOGY_LEVEL": "transcendent"
       }
     },
@@ -189,7 +189,7 @@ Include: Guardian blessing markers, data quality sigils, performance omens."
 ### Guardian Enhancement Flow
 1. Skill analyzes request for Guardian intervention opportunities
 2. Selected Guardian(s) provide creative direction enhancement
-3. Oracle branding ensures enterprise compliance
+3. Enterprise branding ensures enterprise compliance
 4. Nano Banana generates with mystical prompt infusion
 5. Post-processing applies Guardian sigils and elemental accents
 
@@ -203,7 +203,7 @@ Include: Guardian blessing markers, data quality sigils, performance omens."
 - [ ] Mythology enhances, doesn't obscure
 - [ ] Transcendent quality achieved
 
-**Oracle Compliance:**
+**Enterprise Compliance:**
 - [ ] Brand colors correctly integrated
 - [ ] Typography follows enterprise standards
 - [ ] Layout maintains professional clarity
@@ -228,7 +228,7 @@ Include: Guardian blessing markers, data quality sigils, performance omens."
 - Dynamic Guardian selection based on content type
 - Collaborative multi-Guardian enhancement available
 
-**Oracle Synergy:**
+**Enterprise Synergy:**
 - Enterprise-grade reliability with creative enhancement
 - Brand compliance maintained while pushing boundaries
 - Professional standards elevated with mythical depth
@@ -240,4 +240,4 @@ Include: Guardian blessing markers, data quality sigils, performance omens."
 
 ---
 
-*Transcend the ordinary with Arcanea InfoGenius Pro - where Guardian wisdom meets Oracle precision to create visuals that inspire action and transform understanding.*
+*Transcend the ordinary with Arcanea InfoGenius Pro - where Guardian wisdom meets Enterprise precision to create visuals that inspire action and transform understanding.*

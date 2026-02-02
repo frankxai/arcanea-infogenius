@@ -157,7 +157,7 @@
     <circle cx="600" cy="380" r="100" fill="url(#citadelGlow)" opacity="0.8"/>
     <circle cx="600" cy="380" r="60" fill="#ffffff" opacity="0.9"/>
     <circle cx="600" cy="380" r="30" fill="#FFD23F"/>
-    <!-- Oracle Red accents -->
+    <!-- Accent Red accents -->
     <circle cx="600" cy="380" r="35" fill="none" stroke="#C74634" stroke-width="3"/>
     <!-- The Awakened Eye -->
     <text x="600" y="395" text-anchor="middle" font-size="28">👁️</text>

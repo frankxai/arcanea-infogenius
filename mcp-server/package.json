@@ -1,7 +1,7 @@
 {
   "name": "arcanea-infogenius-mcp",
-  "version": "1.0.0",
-  "description": "Advanced MCP server for Arcanea InfoGenius Pro - Guardian AI enhanced visual generation",
+  "version": "2.0.0",
+  "description": "Gemini 3 Pro visual generation with Guardian AI routing",
   "main": "dist/index.js",
   "type": "module",
   "bin": {
@@ -26,13 +26,13 @@
     "arcanea",
     "infogenius",
     "guardian-ai",
-    "oracle",
     "visual-generation",
     "claude-code",
-    "gemini",
-    "transcendent-ai"
+    "gemini-3-pro",
+    "ai-images",
+    "technical-diagrams"
   ],
-  "author": "Arcanea Systems - Enhanced with Guardian AI Intelligence",
+  "author": "frankxai",
   "license": "MIT",
   "dependencies": {
     "@google/genai": "^1.16.0",
@@ -53,5 +53,9 @@
   },
   "engines": {
     "node": ">=18.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/frankxai/arcanea-infogenius.git"
   }
 }

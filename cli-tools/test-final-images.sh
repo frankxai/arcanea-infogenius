@@ -12,8 +12,8 @@ echo ""
 
 PROMPT1="Create a professional enterprise architecture diagram showing digital transformation journey.
 
-Oracle Branding:
-- Primary color: Oracle Red (#C74634) for core services
+Enterprise Branding:
+- Primary color: Enterprise Red (#C74634) for core services
 - Secondary: Dark gray (#312D2A) for text
 - Background: Clean white with subtle gradients
 - Style: Modern, flat design with subtle shadows
@@ -42,8 +42,8 @@ echo ""
 
 PROMPT2="Create a technical data lakehouse architecture diagram.
 
-Oracle Branding:
-- Primary color: Oracle Red (#C74634) for core services
+Enterprise Branding:
+- Primary color: Enterprise Red (#C74634) for core services
 - Secondary: Medium gray (#747775) for secondary elements
 - Background: Light gray (#F5F5F5) for clarity
 - Style: Clean technical diagram with clear hierarchy

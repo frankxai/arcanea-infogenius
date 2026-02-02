@@ -53,7 +53,7 @@ if [ "$USE_GH" = true ]; then
     # Create repository
     gh repo create arcanea-infogenius \
         --public \
-        --description "🌟 Arcanea InfoGenius Pro - Sophisticated visual generation system with Guardian AI agents, Oracle compliance, and transcendent quality. Creates magical, professional visuals through AI." \
+        --description "🌟 Arcanea InfoGenius Pro - Sophisticated visual generation system with Guardian AI agents, Enterprise compliance, and transcendent quality. Creates magical, professional visuals through AI." \
         --homepage "https://github.com/$GITHUB_USERNAME/arcanea-infogenius" \
         --source=. \
         --remote=origin \
@@ -90,7 +90,7 @@ echo ""
 echo "Next steps:"
 echo "1. Visit the repository on GitHub"
 echo "2. Enable Issues and Discussions in Settings"
-echo "3. Add topics: mcp-server, ai-visual-generation, guardian-ai, oracle-compliance"
+echo "3. Add topics: mcp-server, ai-visual-generation, guardian-ai, enterprise-compliance"
 echo "4. Star your own repository! ⭐"
 echo "5. Share the link: https://github.com/$GITHUB_USERNAME/arcanea-infogenius"
 echo ""

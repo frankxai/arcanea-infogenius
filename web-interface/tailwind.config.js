@@ -14,12 +14,12 @@ export default {
         'wind-clarity': '#98D8C8',
         'void-mystery': '#1A1A2E',
         
-        // Oracle Brand Colors
-        'oracle-red': '#C74634',
-        'oracle-black': '#312D2A',
-        'oracle-gray': '#F5F5F5',
-        'oracle-medium': '#747775',
-        'oracle-blue': '#1A73E8',
+        // Brand Colors
+        'accent-red': '#C74634',
+        'accent-black': '#312D2A',
+        'accent-gray': '#F5F5F5',
+        'accent-medium': '#747775',
+        'accent-blue': '#1A73E8',
         
         // Arcanea Transcendent Gradients
         'transcendent': {
@@ -31,7 +31,7 @@ export default {
         }
       },
       fontFamily: {
-        'arcania': ['"Oracle Sans"', "Poppins", "system-ui", "sans-serif"],
+        'arcania': ['"Inter"', "Poppins", "system-ui", "sans-serif"],
         'mythic': ['"Georgia"', "Times New Roman", "serif"],
         'runic': ['"JetBrains Mono"', "Consolas", "monospace"]
       },

@@ -74,10 +74,10 @@ const ELEMENTAL_COLORS = {
   void: ['#1A1A2E', '#16213E', '#0F3460']     // Mystery, innovation, potential
 };
 
-// Oracle brand colors
-const ORACLE_COLORS = {
-  primary: '#C74634',     // Oracle Red
-  text: '#312D2A',        // Oracle Black
+// Enterprise brand colors
+const ENTERPRISE_COLORS = {
+  primary: '#C74634',     // Enterprise Red
+  text: '#312D2A',        // Enterprise Black
   background: '#FFFFFF',   // White
   light_gray: '#F5F5F5',   // Light Gray
   medium_gray: '#747775',  // Medium Gray
@@ -150,11 +150,11 @@ Visual Style:
 - Resolution: ${resolution}
 - Target Audience: ${audience}
 
-Oracle Enterprise Foundation:
-- Primary: Oracle Red (#C74634) for core enterprise services
-- Text: Oracle Black (#312D2A) for labels and headers
+Enterprise Enterprise Foundation:
+- Primary: Enterprise Red (#C74634) for core enterprise services
+- Text: Enterprise Black (#312D2A) for labels and headers
 - Background: Clean white with subtle gradients
-- Typography: Oracle Sans with Arcanea runic accents
+- Typography: Enterprise Sans with Arcanea runic accents
 
 Transcendent Elements:
 - Mythical sigils and Guardian symbols integrated

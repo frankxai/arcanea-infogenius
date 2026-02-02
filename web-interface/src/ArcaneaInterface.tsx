@@ -168,7 +168,7 @@ const ArcaneaInterface: React.FC = () => {
                 <motion.div
                   animate={{ rotate: 360 }}
                   transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                  className="w-10 h-10 bg-oracle-red rounded-full flex items-center justify-center"
+                  className="w-10 h-10 bg-accent-red rounded-full flex items-center justify-center"
                 >
                   <Sparkles className="w-6 h-6" />
                 </motion.div>
@@ -215,7 +215,7 @@ const ArcaneaInterface: React.FC = () => {
                   value={topic}
                   onChange={(e) => setTopic(e.target.value)}
                   placeholder="Describe the architecture or visual you want to generate..."
-                  className="w-full px-4 py-3 rounded-lg bg-black/20 border border-white/10 text-white placeholder-white/50 focus:outline-none focus:border-oracle-red transition-colors resize-none"
+                  className="w-full px-4 py-3 rounded-lg bg-black/20 border border-white/10 text-white placeholder-white/50 focus:outline-none focus:border-accent-red transition-colors resize-none"
                   rows={4}
                 />
               </motion.div>
@@ -275,7 +275,7 @@ const ArcaneaInterface: React.FC = () => {
                     <select
                       value={visualStyle}
                       onChange={(e) => setVisualStyle(e.target.value)}
-                      className="w-full px-3 py-2 rounded-lg bg-black/20 border border-white/10 text-white focus:outline-none focus:border-oracle-red"
+                      className="w-full px-3 py-2 rounded-lg bg-black/20 border border-white/10 text-white focus:outline-none focus:border-accent-red"
                     >
                       {VISUAL_STYLES.map(style => (
                         <option key={style.value} value={style.value}>
@@ -291,7 +291,7 @@ const ArcaneaInterface: React.FC = () => {
                     <select
                       value={resolution}
                       onChange={(e) => setResolution(e.target.value)}
-                      className="w-full px-3 py-2 rounded-lg bg-black/20 border border-white/10 text-white focus:outline-none focus:border-oracle-red"
+                      className="w-full px-3 py-2 rounded-lg bg-black/20 border border-white/10 text-white focus:outline-none focus:border-accent-red"
                     >
                       {RESOLUTIONS.map(res => (
                         <option key={res.value} value={res.value}>
@@ -307,7 +307,7 @@ const ArcaneaInterface: React.FC = () => {
                     <select
                       value={audience}
                       onChange={(e) => setAudience(e.target.value)}
-                      className="w-full px-3 py-2 rounded-lg bg-black/20 border border-white/10 text-white focus:outline-none focus:border-oracle-red"
+                      className="w-full px-3 py-2 rounded-lg bg-black/20 border border-white/10 text-white focus:outline-none focus:border-accent-red"
                     >
                       {AUDIENCES.map(aud => (
                         <option key={aud.value} value={aud.value}>
@@ -325,7 +325,7 @@ const ArcaneaInterface: React.FC = () => {
                 whileTap={{ scale: 0.98 }}
                 onClick={generateImage}
                 disabled={!topic.trim() || isGenerating}
-                className="w-full py-4 bg-gradient-to-r from-oracle-red to-dragon-fire rounded-xl font-bold text-white border-2 border-transparent hover:border-white/30 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
+                className="w-full py-4 bg-gradient-to-r from-accent-red to-dragon-fire rounded-xl font-bold text-white border-2 border-transparent hover:border-white/30 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
               >
                 {isGenerating ? (
                   <>
@@ -364,8 +364,8 @@ const ArcaneaInterface: React.FC = () => {
                               style={{ backgroundColor: selectedGuardianData.color + '20', color: selectedGuardianData.color }}>
                           {selectedGuardianData.element} Elemental
                         </span>
-                        <span className="text-xs px-2 py-1 rounded bg-oracle-red/20 text-oracle-red">
-                          Oracle Enhanced
+                        <span className="text-xs px-2 py-1 rounded bg-accent-red/20 text-accent-red">
+                          AI Enhanced
                         </span>
                       </div>
                     </div>

@@ -16,9 +16,9 @@ Arcanea Guardian Enhancement:
 - Guardian Enhancement: Fiery energy with calculated risk-taking
 - Elemental Color: #FF6B35
 
-Oracle Enterprise Foundation:
-- Primary: Oracle Red (#C74634) for core enterprise services
-- Typography: Oracle Sans with Arcanea runic accents
+Enterprise Enterprise Foundation:
+- Primary: Enterprise Red (#C74634) for core enterprise services
+- Typography: Enterprise Sans with Arcanea runic accents
 - Layout: Dynamic flow with elemental energy streams
 
 Visual Requirements:
@@ -40,8 +40,8 @@ Arcanea Guardian Enhancement:
 - Guardian Enhancement: Fluid depth with profound insight
 - Elemental Color: #2E86AB
 
-Oracle Enterprise Foundation:
-- Primary: Oracle Red (#C74634) for core services
+Enterprise Enterprise Foundation:
+- Primary: Enterprise Red (#C74634) for core services
 - Data Flow: Water elemental streams representing data movement
 - Layout: Clean lakehouse structure with mythical depth
 

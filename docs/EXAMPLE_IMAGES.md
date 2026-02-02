@@ -68,7 +68,7 @@ With link:
 ## 🎨 Design Guidelines for Generated Images
 
 ### Color Scheme
-- **Primary**: Oracle Red (#C74634)
+- **Primary**: Enterprise Red (#C74634)
 - **Secondary**: Elemental colors
 - **Background**: Dark theme for mystical feel
 - **Text**: White with high contrast
@@ -176,7 +176,7 @@ export GEMINI_API_KEY="your-api-key"
 
 ![Hero Banner](docs/images/arcanea-vision-hero.png)
 
-### *Where Guardian Wisdom Meets Oracle Excellence*
+### *Where Guardian Wisdom Meets Enterprise Excellence*
 
 [![Version](https://img.shields.io/badge/Version-2.0.0-blue)]()
 [![Quality](https://img.shields.io/badge/Quality-TRANSCENDENT%20DIAMOND-yellow)]()

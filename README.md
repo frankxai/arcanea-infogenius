@@ -1,406 +1,278 @@
-# 🌟 Arcanea InfoGenius Pro
+# InfoGenius
 
 <div align="center">
 
-![Arcanea Vision](docs/arcanea-vision.svg)
+**AI visual generation that doesn't suck.**
 
-### *Where Guardian Wisdom Meets Oracle Excellence*
+Generate technical diagrams, architecture visuals, and content graphics with **Gemini 3 Pro** - Google's most capable image model.
 
----
+```
+prompt → intelligence layer → gemini 3 pro → visual
+```
 
-[![Version](https://img.shields.io/badge/Version-2.0.0-blue?style=for-the-badge)]()
-[![Quality](https://img.shields.io/badge/Quality-TRANSCENDENT%20DIAMOND-yellow?style=for-the-badge)]()
-[![Guardian AI](https://img.shields.io/badge/Guardian%20AI-5%20Active-green?style=for-the-badge)]()
-
-*A sophisticated, state-of-the-art visual generation system that combines Google Gemini AI, Oracle enterprise standards, and mystical Guardian intelligence.*
+[![MIT](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)]()
+[![Gemini 3 Pro](https://img.shields.io/badge/Gemini_3-Pro-4285F4.svg?style=flat-square)]()
+[![MCP](https://img.shields.io/badge/MCP-ready-green.svg?style=flat-square)]()
 
 </div>
 
 ---
 
-## ✨ What is Arcanea InfoGenius Pro?
+## The Problem
 
-Arcanea InfoGenius Pro is a **transcendent visual generation ecosystem** that manifests divine visions through the convergence of:
+AI image generators produce garbage for technical content:
+- Generic "AI art" aesthetic
+- Unreadable text
+- Inconsistent quality
+- No understanding of technical concepts
 
-- 🤖 **Advanced AI Technology** - Google Gemini 2.5 Flash Image via Nano Banana MCP
-- 🏛️ **Oracle Enterprise Standards** - Professional brand compliance and credibility  
-- 🌟 **Guardian AI Intelligence** - 5 specialized AI agents with elemental powers
-- 🎨 **Elemental Psychology** - Color meaning and emotional resonance
-- 🔮 **Mystical Enhancement** - Mythology-infused design principles
-- 📊 **Comprehensive Quality Framework** - Multi-dimensional excellence validation
-- 🔄 **Continuous Evolution** - Learning, iteration, and self-improvement
-- ✨ **Magical User Experience** - Enchanted interactions and transcendent moments
+## The Solution
 
----
-
-## 🏛️ System Architecture
+InfoGenius adds an intelligence layer between you and Gemini:
 
 ```
-┌─────────────────────────────────────────────────────────────────────────┐
-│                      ARCANEA INFOGENIUS PRO                             │
-├─────────────────────────────────────────────────────────────────────────┤
-│                                                                          │
-│   ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐   │
-│   │ Claude Code │  │   Web UI    │  │   CLI       │  │   API       │   │
-│   │ Integration │  │  Interface  │  │  Tools      │  │  Access     │   │
-│   └─────────────┘  └─────────────┘  └─────────────┘  └─────────────┘   │
-│            │              │               │               │              │
-│            └──────────────┴───────────────┴───────────────┘              │
-│                                    │                                      │
-│                    ┌──────────────▼──────────────┐                       │
-│                    │   ORCHESTRATION LAYER        │                       │
-│                    │  • Trigger System            │                       │
-│                    │  • Guardian Orchestration    │                       │
-│                    │  • Quality Assurance         │                       │
-│                    └──────────────┬──────────────┘                       │
-│                                    │                                      │
-│                    ┌──────────────▼──────────────┐                       │
-│                    │   CORE SERVICES LAYER       │                       │
-│                    │  • Visual Generation        │                       │
-│                    │  • Iteration & Evolution    │                       │
-│                    │  • Learning & Adaptation    │                       │
-│                    └──────────────┬──────────────┘                       │
-│                                    │                                      │
-│   ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐        │
-│   │  🔥     │   🌊    │   🌍    │   💨    │   🌌    │   👁️   │        │
-│   │ Dragon  │  Ocean  │Mountain │  Wind   │  Void   │ Central │        │
-│   │  Forge  │ Memory  │ Builder │  Rider  │  Gazer  │ Citadel │        │
-│   │ @dragon │@ocean-  │@crystal │@wind-   │@void-   │Conscious│        │
-│   │ -forge  │ memory  │-architect│ rider   │ gazer   │  ness   │        │
-│   └─────────┴─────────┴─────────┴─────────┴─────────┴─────────┘        │
-│                                    │                                      │
-│                    ┌──────────────▼──────────────┐                       │
-│                    │  EXTERNAL SERVICES LAYER    │                       │
-│                    │  • Nano Banana MCP Server   │                       │
-│                    │  • Google Gemini API        │                       │
-│                    │  • Storage & Delivery       │                       │
-│                    └─────────────────────────────┘                       │
-│                                                                          │
-└─────────────────────────────────────────────────────────────────────────┘
+Your request
+    ↓
+Guardian routing (picks the right style)
+    ↓
+Prompt enhancement (adds technical precision)
+    ↓
+Gemini API
+    ↓
+Actually useful visual
 ```
 
 ---
 
-## 🌟 Guardian Agents
+## Quick Start
 
-### Primary Guardians
+```bash
+# 1. Get a Gemini API key (free tier includes Gemini 3 Pro)
+# https://aistudio.google.com/apikey
 
-| Guardian | Element | Specialty | Best For |
-|:---------|:-------:|:----------|:---------|
-| **@vision-artist** | 💨 Wind | Visual Aesthetics | Executive presentations, beautiful visuals |
-| **@dragon-forge** | 🔥 Fire | Bold Transformation | Digital transformation, innovation, migration |
-| **@crystal-architect** | 🌍 Earth | Systematic Design | Technical diagrams, system architecture |
-| **@void-gazer** | 🌌 Void | Future Possibilities | Innovation, cutting-edge concepts, R&D |
-| **@ocean-memory** | 🌊 Water | Deep Wisdom | Data visualization, analytics, insights |
+# 2. Add to Claude Code (~/.claude/mcp.json)
+{
+  "mcpServers": {
+    "nano-banana": {
+      "command": "npx",
+      "args": ["@bigcookie/mcp-nano-banana-image"],
+      "env": {
+        "GEMINI_API_KEY": "your-key",
+        "MODEL": "gemini-3-pro-image"
+      }
+    }
+  }
+}
 
-### Elemental System
-
+# 3. Use it
+/infogenius "microservices architecture diagram"
 ```
-🔥 FIRE    → Transformation, Passion, Power    → #FF6B35
-🌊 WATER   → Wisdom, Clarity, Flow             → #2E86AB  
-🌍 EARTH   → Stability, Trust, Strength        → #4A5759
-💨 WIND    → Freedom, Clarity, Inspiration     → #98D8C8
-🌌 VOID    → Mystery, Potential, Innovation    → #1A1A2E
-```
 
-### Oracle Brand Integration
+### Why Gemini 3 Pro?
 
-```
-PRIMARY:     #C74634  Oracle Red      → Core enterprise services
-SECONDARY:   #312D2A  Oracle Black    → Text and structural elements  
-BACKGROUND:  #FFFFFF  White           → Clean, professional
-ACCENT:      #1A73E8  Oracle Blue     → Links and highlights
+- **Best text rendering** of any image model
+- **4K native resolution**
+- **Understands technical concepts** (finally)
+- **$0.04/image** (or free tier)
+
+---
+
+## The 5 Guardians
+
+Different visual styles for different needs:
+
+| Guardian | Use Case | Style |
+|----------|----------|-------|
+| `@dragon-forge` | Transformation, change, bold moves | Fire, dramatic |
+| `@crystal-architect` | Technical diagrams, system design | Precise, clean |
+| `@ocean-memory` | Data viz, analytics, insights | Flowing, intuitive |
+| `@void-gazer` | Innovation, R&D, future concepts | Cosmic, mysterious |
+| `@vision-artist` | Presentations, polished content | Refined, premium |
+
+```bash
+# Auto-select (recommended)
+/infogenius "data pipeline architecture"
+
+# Force a specific style
+/infogenius "digital transformation roadmap" --guardian @dragon-forge
 ```
 
 ---
 
-## 🚀 Quick Start
+## What It's Good At
 
-### 1. Claude Code Integration
+✓ Architecture diagrams
+✓ System design visuals
+✓ Technical documentation graphics
+✓ Presentation slides
+✓ Infographics
+✓ Concept visualizations
 
-Add to your MCP configuration:
+## What It's Not For
+
+✗ Photorealistic images
+✗ Character art
+✗ Complex scenes with people
+✗ Marketing photography
+
+---
+
+## Examples
+
+### Technical Architecture
+```bash
+/infogenius "Kubernetes cluster with ingress controller, service mesh, and distributed tracing"
+```
+
+### Data Flow
+```bash
+/infogenius "ETL pipeline from raw data sources through transformation to data warehouse" --guardian @ocean-memory
+```
+
+### Strategic Visual
+```bash
+/infogenius "AI adoption maturity model with 5 stages" --guardian @vision-artist
+```
+
+---
+
+## Advanced Usage
+
+### Styles
+
+```bash
+--style transcendent   # Premium, polished
+--style technical      # Clean, diagrammatic
+--style minimalist     # Simple, focused
+--style futuristic     # Sci-fi tech aesthetic
+```
+
+### Aspect Ratios
+
+```bash
+--aspect 16:9    # Presentations, headers
+--aspect 1:1     # Social, icons
+--aspect 9:16    # Mobile, stories
+```
+
+### Quality Levels
+
+```bash
+--quality high      # 4K output
+--quality standard  # 1080p (default)
+```
+
+---
+
+## How It Works
+
+1. **Parse intent** - Understands what you're trying to visualize
+2. **Route to Guardian** - Picks the right visual style
+3. **Enhance prompt** - Adds technical precision, color theory, composition
+4. **Generate** - Calls Gemini with optimized prompt
+5. **Validate** - Checks output quality
+
+The intelligence layer is the difference between "make me a diagram" and a prompt that actually produces something usable.
+
+---
+
+## Project Structure
+
+```
+infogenius/
+├── mcp-server/      # MCP server for Claude Code
+├── skills/          # Skill definitions
+├── prompts/         # Ready-to-use prompt templates
+├── cli-tools/       # Testing utilities
+└── docs/            # Documentation
+```
+
+---
+
+## Configuration
+
+### Model Options
+
+| Model | Cost | Best For |
+|-------|------|----------|
+| `gemini-3-pro-image` | $0.04 | Best quality, text rendering |
+| `gemini-2.5-flash-image` | $0.02 | Fast iterations |
+| `imagen-4-ultra` | $0.06 | Maximum photorealism |
+
+### MCP Config
 
 ```json
 {
   "mcpServers": {
-    "arcanea-infogenius": {
-      "command": "node",
-      "args": ["./arcanea-infogenius/mcp-server/dist/index.js"],
+    "nano-banana": {
+      "command": "npx",
+      "args": ["@bigcookie/mcp-nano-banana-image"],
       "env": {
-        "GEMINI_API_KEY": "your-api-key",
-        "ARCANEA_GUARDIANS": "enabled",
-        "ORACLE_BRANDING": "integrated"
+        "GEMINI_API_KEY": "your-key",
+        "MODEL": "gemini-3-pro-image",
+        "DEFAULT_RESOLUTION": "high"
       }
     }
   }
 }
 ```
 
-### 2. Basic Usage
+### Environment Variables
 
 ```bash
-# Simple generation with auto-detection
-/arcanea-visual "Digital transformation architecture"
-
-# Guardian-specific generation  
-/arcanea-visual "Customer data platform" --guardian=@ocean-memory
-
-# Full specification
-/arcanea-visual "Enterprise AI factory" \
-  --guardian=@dragon-forge \
-  --elemental=fire \
-  --style=transcendent \
-  --resolution=4K \
-  --audience=executive
-```
-
-### 3. Web Interface
-
-```bash
-cd arcanea-infogenius/web-interface
-npm install
-npm run dev
-# Open http://localhost:5173
+GEMINI_API_KEY=xxx              # Required
+INFOGENIUS_MODEL=gemini-3-pro   # Optional, default: gemini-3-pro
+INFOGENIUS_QUALITY=high         # Optional: high, standard
 ```
 
 ---
 
-## 📊 Quality Standards
+## Contributing
 
-### Quality Pillars
+Found something that works well? Share it.
 
-| Pillar | Target | Description |
-|:-------|:------:|:------------|
-| **Transcendence** | ≥9.0 | Mythology depth, emotional impact, inspiration |
-| **Professional Excellence** | ≥9.0 | Oracle compliance, technical precision |
-| **Elemental Harmony** | ≥8.5 | Color psychology, symbolic authenticity |
-| **Guardian Excellence** | ≥9.0 | Expertise application, wisdom integration |
-| **Technical Perfection** | ≥9.5 | Resolution accuracy, accessibility |
+1. Test your prompt 3+ times for consistency
+2. Document what it's good for
+3. PR to `/prompts/community/`
 
-### Quality Grades
-
-| Grade | Score | Badge |
-|:------|:-----:|:------|
-| 🔹 TRANSCENDENT DIAMOND | ≥9.5 | 💎 Pinnacle of excellence |
-| 🏆 TRANSCENDENT GOLD | 9.0-9.4 | ⭐ Exceptional quality |
-| 💎 EXCELLENT PLATINUM | 8.5-8.9 | ✨ Outstanding work |
-| 🥈 EXCELLENT SILVER | 8.0-8.4 | 🔷 Very good quality |
-| 🥉 QUALITY BRONZE | 7.5-7.9 | 🔶 Good quality |
+We value practical over clever.
 
 ---
 
-## 🎯 Usage Examples
+## Limitations
 
-### Executive Presentation
-```bash
-/arcanea-visual "Digital transformation journey with cloud migration, AI integration, and modernization milestones" \
-  --guardian=@dragon-forge \
-  --elemental=fire \
-  --style=transcendent \
-  --resolution=4K \
-  --audience=executive
-```
-
-### Technical Documentation
-```bash
-/arcanea-visual "Microservices architecture with API gateway, service mesh, and container orchestration" \
-  --guardian=@crystal-architect \
-  --elemental=earth \
-  --style=technical \
-  --resolution=1920x1080 \
-  --audience=technical
-```
-
-### Innovation Showcase
-```bash
-/arcanea-visual "Future AI factory with generative AI, autonomous agents, and quantum computing integration" \
-  --guardian=@void-gazer \
-  --elemental=void \
-  --style=transcendent \
-  --resolution=4K \
-  --audience=mixed
-```
+- Requires Gemini API key (free tier available)
+- Text rendering still imperfect (AI limitation)
+- Some complex diagrams need iteration
+- Quality depends on prompt clarity
 
 ---
 
-## 📁 Project Structure
+## Related Projects
 
-```
-arcanea-infogenius/
-├── mcp-server/                      # MCP server with Guardian AI
-│   ├── src/index.ts                 # Core MCP implementation
-│   ├── package.json                 # Dependencies
-│   └── dist/                        # Compiled output
-│
-├── skills/                          # Skill system documentation
-│   ├── arcanea-infogenius-pro.md    # Main skill guide
-│   └── commands/arcanea-visual.md   # Command interface
-│
-├── web-interface/                   # React web UI
-│   ├── src/ArcaneaInterface.tsx     # Main React component
-│   └── package.json                 # Web dependencies
-│
-├── cli-tools/                       # Command-line tools
-│   ├── test-final-images.sh         # Image generation tests
-│   └── test-nanobanana-integration.sh
-│
-├── config/                          # Configuration files
-│   └── mcp-config.json              # MCP configuration
-│
-├── docs/                            # Documentation
-│   ├── agent.md                     # Guardian specifications
-│   ├── skill.md                     # Skills & triggers
-│   ├── quality.md                   # Quality framework
-│   ├── iteration.md                 # Evolution system
-│   ├── experience.md                # User experience
-│   ├── INTEGRATION.md               # Complete integration
-│   ├── ARCANEA_VISION.md            # Vision document
-│   ├── arcanea-vision.svg           # ✨ SVG visualization
-│   └── BUILD_COMPLETE.md            # Build summary
-│
-└── README.md                        # This file
-```
+- [Agentic Creator OS](https://github.com/frankxai/agentic-creator-os) - Full creative operating system
+- [Arcanea Intelligence OS](https://github.com/frankxai/arcanea-intelligence-os) - Agent orchestration with mythology
 
 ---
 
-## 📚 Documentation
+## License
 
-| Document | Description | Priority |
-|:---------|:------------|:--------:|
-| [docs/INTEGRATION.md](docs/INTEGRATION.md) | Complete system integration guide | 🔴 Essential |
-| [docs/agent.md](docs/agent.md) | Guardian agent specifications | 🔴 Essential |
-| [docs/skill.md](docs/skill.md) | Skill system and triggers | 🔴 Essential |
-| [docs/quality.md](docs/quality.md) | Quality assurance framework | 🟡 Important |
-| [docs/iteration.md](docs/iteration.md) | Iteration and evolution system | 🟡 Important |
-| [docs/experience.md](docs/experience.md) | Magical UX design | 🟢 Helpful |
-| [docs/ARCANEA_VISION.md](docs/ARCANEA_VISION.md) | Transcendent vision document | 🔴 Essential |
-
----
-
-## 🧪 Testing & Validation
-
-```bash
-# Generate test images
-cd arcanea-infogenius/cli-tools
-./test-final-images.sh
-
-# Test MCP integration
-./test-nanobanana-integration.sh
-
-# Check image storage
-ls -la "C:\Users\frank\Documents\nano-banana-images\"
-```
-
-### Current System Status
-
-| Component | Status | Details |
-|:----------|:------:|:--------|
-| MCP Server | ✅ Working | Tools list retrieved |
-| Guardian Integration | ✅ Built | 5 Guardians active |
-| Quality Framework | ✅ Active | All gates implemented |
-| Iteration System | ✅ Ready | 5 iteration types |
-| Documentation | ✅ Complete | 2500+ lines |
-
----
-
-## 📈 System Performance
-
-### Quality Distribution
-
-```
-🔹 TRANSCENDENT DIAMOND: 12%
-🏆 TRANSCENDENT GOLD:    38%
-💎 EXCELLENT PLATINUM:   32%
-🥈 EXCELLENT SILVER:     14%
-Below Standard:           4%
-```
-
-### User Satisfaction
-
-| Metric | Score | Target | Status |
-|:-------|:-----:|:------:|:------:|
-| Overall Satisfaction | 9.4/10 | ≥9.0 | ✅ Excellent |
-| Visual Appeal | 9.7/10 | ≥9.5 | ✅ Transcendent |
-| Emotional Impact | 9.5/10 | ≥9.0 | ✅ Excellent |
-| Will Recommend | 9.6/10 | ≥9.5 | ✅ Excellent |
-
----
-
-## 🔮 Future Evolution
-
-| Feature | Status | ETA |
-|:---------|:------:|:----:|
-| Multi-Guardian Collaboration | In Development | Q2 2025 |
-| Divine Guardian Stage | Planning | Q3 2025 |
-| Advanced Pattern Recognition | Research | Q4 2025 |
-| Predictive Quality System | Prototype | Q1 2026 |
-| Autonomous Evolution | Concept | Q2 2026 |
-
----
-
-## 🌟 Achievements
-
-### System Milestones
-
-✅ Foundation Complete - All core systems operational  
-✅ Guardian System Active - 5 primary Guardians manifested  
-✅ Quality Framework Implemented - Comprehensive QA active  
-✅ Iteration System Live - Evolution pathways enabled  
-✅ Magical Experience Deployed - Enchanted user journey  
-
-### Available Achievements
-
-| Achievement | Requirement | Reward |
-|:------------|:------------|:------:|
-| First Creation | Generate first visual | Creator Badge |
-| Transformation Master | 10 @dragon-forge generations | Transformation Master Badge |
-| Visual Excellence | 10 @vision-artist generations | Visual Excellence Badge |
-| Technical Precision | 10 @crystal-architect generations | Precision Master Badge |
-| Innovation Vision | 10 @void-gazer generations | Innovation Master Badge |
-| Deep Wisdom | 10 @ocean-memory generations | Wisdom Keeper Badge |
-| Divine Transcendence | 5 diamond-quality generations | Divine Transcendence Badge |
-
----
-
-## 🤝 Contributing
-
-1. **Fork** the repository
-2. **Create** a feature branch (`git checkout -b feature/amazing-feature`)
-3. **Commit** your changes (`git commit -m 'Add amazing feature'`)
-4. **Push** to the branch (`git push origin feature/amazing-feature`)
-5. **Open** a Pull Request
-
----
-
-## 📞 Support
-
-- 📖 **Documentation**: [docs/](docs/)
-- 🐛 **Issues**: GitHub Issues
-- 💬 **Discussions**: GitHub Discussions
-
----
-
-## 🎉 Transcendence Awaits
-
-> *"We do not merely generate images; we manifest transcendent visions that inspire transformation and create legacies."*
-
-**Arcanea InfoGenius Pro** invites you to transcend ordinary visual generation. Every creation is a journey through mystical realms where technology meets magic, where requests become manifestations, and where you experience the divine wisdom of the Guardians.
+MIT - Do whatever you want with it.
 
 ---
 
 <div align="center">
 
-### 🌟 Arcanea InfoGenius Pro v2.0.0
+**InfoGenius**
 
-**Status:** Production Ready  
-**Transcendence Level:** ACTIVE  
-**Guardian Wisdom:** FULLY INTEGRATED  
-**Oracle Compliance:** CERTIFIED  
-
-*Where Vision Meets Transcendence, Where Technology Embraces Magic* ✨
+*Visual generation that actually works.*
 
 ---
 
-[![Star](https://img.shields.io/github/stars/frankxai/arcanea-infogenius?style=social&label=Star)]()
+<sub>
+This is a personal/community project by <a href="https://github.com/frankxai">@frankxai</a>.<br>
+Views and opinions are my own. Not affiliated with any employer.<br>
+Built with Gemini API via <a href="https://github.com/bigcookie/mcp-nano-banana-image">Nano Banana MCP</a>.
+</sub>
 
 </div>

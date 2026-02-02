@@ -1,12 +1,12 @@
 ---
-description: Generate transcendent Arcanea visuals with Guardian AI enhancement and Oracle enterprise precision
+description: Generate transcendent Arcanea visuals with Guardian AI enhancement and Enterprise enterprise precision
 allowed-tools: Read, ToolSearch, mcp__nano-banana__generate_image, mcp__arcanea-mcp__invoke_guardian
 argument-hint: [description] [--guardian=@agent] [--elemental=fire|water|earth|wind|void] [--style=transcendent|technical|executive] [--resolution=4K|1920x1080]
 ---
 
 ## Context
 
-You are generating a transcendent visual for Arcanea that combines Oracle enterprise standards with Guardian AI intelligence. Use the arcanea-infogenius-pro skill for mythical enhancement and brand compliance.
+You are generating a transcendent visual for Arcanea that combines Enterprise enterprise standards with Guardian AI intelligence. Use the arcanea-infogenius-pro skill for mythical enhancement and brand compliance.
 
 ## Your Task
 
@@ -14,7 +14,7 @@ You are generating a transcendent visual for Arcanea that combines Oracle enterp
 2. Analyze the user's visual requirements for Guardian enhancement opportunities
 3. Select appropriate Guardian(s) based on content type and desired outcome
 4. Apply elemental color psychology and mythical symbolism
-5. Construct an optimized transcendent prompt following Arcanea-Oracle fusion guidelines
+5. Construct an optimized transcendent prompt following Arcanea-Enterprise fusion guidelines
 6. Use the nano-banana MCP server to generate the enhanced image
 7. Apply Guardian post-processing enhancements
 8. Return the transcendent visual with metadata
@@ -47,10 +47,10 @@ Arcanea Enhancement:
 - Mythical Elements: [SIGILS, SYMBOLS, ACCENTS]
 - Energy Flow: [DESCRIPTION_OF_ELEMENTAL_STREAMS]
 
-Oracle Enterprise Foundation:
-- Primary: Oracle Red (#C74634) for core services
+Enterprise Enterprise Foundation:
+- Primary: Enterprise Red (#C74634) for core services
 - Arcanea Integration: [ARCANEA_COLOR] for [ENHANCED_MEANING]
-- Typography: Oracle Sans + Arcanea runic accents
+- Typography: Enterprise Sans + Arcanea runic accents
 - Layout: Clean enterprise structure with mythical depth
 
 Visual Requirements:
@@ -88,10 +88,10 @@ Guardian Wisdom Integration:
 1. **Analytical Phase**: Assess content for Guardian intervention points
 2. **Selection Phase**: Choose primary/secondary Guardians based on matrix
 3. **Elemental Mapping**: Apply color psychology and symbolic elements
-4. **Transcendence Weaving**: Integrate mythical depth with Oracle precision
+4. **Transcendence Weaving**: Integrate mythical depth with Enterprise precision
 5. **Generation Phase**: Create with enhanced prompt construction
 6. **Post-Processing**: Apply Guardian sigils and elemental accents
-7. **Quality Validation**: Ensure both Oracle compliance and Arcanea excellence
+7. **Quality Validation**: Ensure both Enterprise compliance and Arcanea excellence
 
 ## Quality Assurance Checklist
 
@@ -101,7 +101,7 @@ Guardian Wisdom Integration:
 - [ ] Mythical depth adds value without confusion
 - [ ] Achieves transcendent visual impact
 
-**Oracle Compliance:**
+**Enterprise Compliance:**
 - [ ] Enterprise standards maintained
 - [ ] Brand guidelines respectfully integrated
 - [ ] Professional clarity preserved
@@ -121,4 +121,4 @@ Guardian Wisdom Integration:
 
 ---
 
-*Generate transcendent visuals that merge the wisdom of Arcanea Guardians with the precision of Oracle enterprise standards.*
+*Generate transcendent visuals that merge the wisdom of Arcanea Guardians with the precision of Enterprise enterprise standards.*

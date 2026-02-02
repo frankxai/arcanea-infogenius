@@ -13,7 +13,7 @@
 ```
 ARCANEA SKILL ECOSYSTEM
 ├── Foundation Skills (Always Active)
-│   ├── Oracle Brand Compliance
+│   ├── Enterprise Brand Compliance
 │   ├── Elemental Psychology Integration
 │   └── Professional Standards
 │
@@ -39,21 +39,21 @@ ARCANEA SKILL ECOSYSTEM
 
 ## 🎯 DETAILED SKILL SPECIFICATIONS
 
-### SKILL: Oracle Brand Compliance
+### SKILL: Enterprise Brand Compliance
 
-**Skill ID:** `skill.oracle-brand-compliance`
+**Skill ID:** `skill.enterprise-brand-compliance`
 **Version:** 2.0.0
 **Activation:** Automatic (Foundation)
 **Guardian Authority:** @crystal-architect
 
 **Description:**
-Ensures all generated visuals maintain Oracle enterprise standards, brand guidelines, and professional credibility while allowing Arcanea enhancement.
+Ensures all generated visuals maintain Enterprise enterprise standards, brand guidelines, and professional credibility while allowing Arcanea enhancement.
 
 **Parameters:**
 ```typescript
-interface OracleBrandComplianceParams {
+interface EnterpriseBrandComplianceParams {
   strictness: 'flexible' | 'standard' | 'strict';
-  emphasis: 'oracle-primary' | 'arcania-primary' | 'balanced';
+  emphasis: 'enterprise-primary' | 'arcania-primary' | 'balanced';
   applicationScope: 'all-elements' | 'core-structure' | 'accents-only';
 }
 ```
@@ -61,16 +61,16 @@ interface OracleBrandComplianceParams {
 **Implementation Protocol:**
 ```
 1. Color Application Hierarchy
-   Primary: Oracle Red (#C74634) for core enterprise services
-   Secondary: Oracle Black (#312D2A) for text and structural elements
-   Accent: Oracle Blue (#1A73E8) for links and highlights
+   Primary: Enterprise Red (#C74634) for core enterprise services
+   Secondary: Enterprise Black (#312D2A) for text and structural elements
+   Accent: Enterprise Blue (#1A73E8) for links and highlights
    Background: Clean white (#FFFFFF) or light gray (#F5F5F5)
 
 2. Typography Standards
-   Headings: Oracle Sans Bold, Poppins fallback
-   Body: Oracle Sans Regular, Inter fallback
+   Headings: Enterprise Sans Bold, Poppins fallback
+   Body: Enterprise Sans Regular, Inter fallback
    Code: JetBrains Mono, Consolas fallback
-   Arcanea Elements: Runic accents with Oracle typography integration
+   Arcanea Elements: Runic accents with Enterprise typography integration
 
 3. Layout Principles
    Professional whitespace management
@@ -86,9 +86,9 @@ interface OracleBrandComplianceParams {
 
 **Examples:**
 ```bash
-/arcanea-visual "Cloud architecture" --oracle-compliance=strict
-/arcanea-visual "Marketing flyer" --oracle-compliance=flexible
-/arcanea-visual "Technical diagram" --oracle-compliance=standard
+/arcanea-visual "Cloud architecture" --enterprise-compliance=strict
+/arcanea-visual "Marketing flyer" --enterprise-compliance=flexible
+/arcanea-visual "Technical diagram" --enterprise-compliance=standard
 ```
 
 ---
@@ -179,7 +179,7 @@ const ELEMENTAL_PALETTE = {
 **Guardian Authority:** @vision-artist
 
 **Description:**
-Generates premium-quality visuals that transcend ordinary diagrams by combining Oracle enterprise standards with Arcanea mythology and Guardian wisdom.
+Generates premium-quality visuals that transcend ordinary diagrams by combining Enterprise enterprise standards with Arcanea mythology and Guardian wisdom.
 
 **Parameters:**
 ```typescript
@@ -214,7 +214,7 @@ interface TranscendentVisualParams {
    └── Map to appropriate Guardian expertise
 
 2. CONSTRUCTION PHASE
-   ├── Build Oracle-compliant structure
+   ├── Build Enterprise-compliant structure
    ├── Integrate elemental psychology
    ├── Apply Guardian enhancement patterns
    ├── Weave mythology into professional frame
@@ -451,7 +451,7 @@ interface TriggerSystem {
 /arcanea-visual "request" --no-auto-trigger
 
 # Multi-skill activation
-/arcanea-visual "request" --skills=skill.transcendent-visual-generation,skill.oracle-brand-compliance
+/arcanea-visual "request" --skills=skill.transcendent-visual-generation,skill.enterprise-brand-compliance
 
 # Guardian consultation mode
 /consult-guardian @dragon-forge "strategy question"
@@ -466,7 +466,7 @@ interface TriggerSystem {
 ```typescript
 interface QualityGate {
   brandCompliance: {
-    oracleRedUsage: boolean;
+    enterpriseRedUsage: boolean;
     typographyStandards: boolean;
     layoutPrinciples: boolean;
     minimumScore: 0.95

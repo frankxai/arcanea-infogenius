@@ -79,6 +79,13 @@ const AUDIENCES = [
   { value: 'mixed', label: 'Mixed', icon: '👥' }
 ];
 
+interface ImageMetadata {
+  prompt?: string;
+  model?: string;
+  enhanced?: boolean;
+  [key: string]: unknown;
+}
+
 interface GeneratedImage {
   url: string;
   description: string;
@@ -87,7 +94,7 @@ interface GeneratedImage {
   style: string;
   resolution: string;
   timestamp: string;
-  metadata?: any;
+  metadata?: ImageMetadata;
 }
 
 const ArcaneaInterface: React.FC = () => {
@@ -119,6 +126,9 @@ const ArcaneaInterface: React.FC = () => {
 
     try {
       // This would call the MCP server in real implementation
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 30000); // 30s timeout
+
       const response = await fetch('/api/generate-visual', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -129,10 +139,16 @@ const ArcaneaInterface: React.FC = () => {
           style: visualStyle,
           resolution,
           audience
-        })
+        }),
+        signal: controller.signal
       });
 
-      if (!response.ok) throw new Error('Generation failed');
+      clearTimeout(timeoutId);
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.message || `Generation failed with status ${response.status}`);
+      }
 
       const result = await response.json();
       
@@ -157,6 +173,15 @@ const ArcaneaInterface: React.FC = () => {
 
   const selectedGuardianData = GUARDIAN_AGENTS.find(g => g.id === selectedGuardian);
 
+  const downloadImage = (image: GeneratedImage) => {
+    const link = document.createElement('a');
+    link.href = image.url;
+    link.download = `arcanea-${image.guardian.toLowerCase().replace(/\s+/g, '-')}-${Date.now()}.png`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <div className={`min-h-screen ${darkMode ? 'dark' : ''}`}>
       <div className="bg-gradient-to-br from-void-mystery via-earth-foundation to-dragon-fire text-white">
@@ -173,7 +198,7 @@ const ArcaneaInterface: React.FC = () => {
                   <Sparkles className="w-6 h-6" />
                 </motion.div>
                 <div>
-                  <h1 className="text-2xl font-bold font-arcania">Arcanea InfoGenius Pro</h1>
+                  <h1 className="text-2xl font-bold font-arcanea">Arcanea InfoGenius Pro</h1>
                   <p className="text-sm opacity-75">Guardian AI Enhanced Visual Generation</p>
                 </div>
               </div>
@@ -182,12 +207,16 @@ const ArcaneaInterface: React.FC = () => {
                 <button
                   onClick={() => setShowGuardianInfo(!showGuardianInfo)}
                   className="p-2 rounded-lg hover:bg-white/10 transition-colors"
+                  aria-label="Toggle Guardian information"
+                  title="Toggle Guardian information"
                 >
                   <Info className="w-5 h-5" />
                 </button>
                 <button
                   onClick={() => setDarkMode(!darkMode)}
                   className="p-2 rounded-lg hover:bg-white/10 transition-colors"
+                  aria-label={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+                  title={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
                 >
                   {darkMode ? <Palette className="w-5 h-5" /> : <Settings className="w-5 h-5" />}
                 </button>
@@ -217,6 +246,9 @@ const ArcaneaInterface: React.FC = () => {
                   placeholder="Describe the architecture or visual you want to generate..."
                   className="w-full px-4 py-3 rounded-lg bg-black/20 border border-white/10 text-white placeholder-white/50 focus:outline-none focus:border-accent-red transition-colors resize-none"
                   rows={4}
+                  maxLength={2000}
+                  aria-label="Visual concept description"
+                  aria-required="true"
                 />
               </motion.div>
 
@@ -407,7 +439,12 @@ const ArcaneaInterface: React.FC = () => {
                           className="w-full h-full object-cover"
                         />
                         <div className="absolute top-2 right-2 flex space-x-2">
-                          <button className="p-2 bg-black/50 rounded-lg hover:bg-black/70 transition-colors">
+                          <button
+                            onClick={() => downloadImage(image)}
+                            className="p-2 bg-black/50 rounded-lg hover:bg-black/70 transition-colors"
+                            aria-label="Download image"
+                            title="Download image"
+                          >
                             <Download className="w-4 h-4" />
                           </button>
                         </div>

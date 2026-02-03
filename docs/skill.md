@@ -53,7 +53,7 @@ Ensures all generated visuals maintain Enterprise enterprise standards, brand gu
 ```typescript
 interface EnterpriseBrandComplianceParams {
   strictness: 'flexible' | 'standard' | 'strict';
-  emphasis: 'enterprise-primary' | 'arcania-primary' | 'balanced';
+  emphasis: 'enterprise-primary' | 'arcanea-primary' | 'balanced';
   applicationScope: 'all-elements' | 'core-structure' | 'accents-only';
 }
 ```

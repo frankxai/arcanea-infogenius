@@ -98,24 +98,45 @@ const server = new Server(
 );
 
 // Initialize Google GenAI
-const genAI = new GoogleGenAI({ 
-  apiKey: process.env.GEMINI_API_KEY || '',
+if (!process.env.GEMINI_API_KEY) {
+  console.error('ERROR: GEMINI_API_KEY environment variable is required');
+  console.error('Please set your API key in the .env file');
+  process.exit(1);
+}
+
+const genAI = new GoogleGenAI({
+  apiKey: process.env.GEMINI_API_KEY,
 });
 
 // Tool definitions
 const GenerateArcaneaVisualSchema = z.object({
-  description: z.string().describe('Visual description and requirements'),
+  description: z.string()
+    .min(10, 'Description must be at least 10 characters')
+    .max(2000, 'Description must not exceed 2000 characters')
+    .describe('Visual description and requirements'),
   guardian: z.string().optional().describe('Guardian agent to enhance the visual'),
-  elemental: z.string().optional().describe('Elemental influence (fire, water, earth, wind, void)'),
+  elemental: z.enum(['fire', 'water', 'earth', 'wind', 'void']).optional().describe('Elemental influence'),
   style: z.enum(['transcendent', 'technical', 'executive']).default('transcendent'),
   resolution: z.enum(['4K', '1920x1080', '2560x1440']).default('1920x1080'),
   audience: z.enum(['executive', 'technical', 'mixed']).default('mixed')
 });
 
 const InvokeGuardianSchema = z.object({
-  guardian: z.string().describe('Guardian agent name'),
-  task: z.string().describe('Task for the Guardian'),
-  context: z.string().optional().describe('Additional context')
+  guardian: z.enum([
+    '@vision-artist',
+    '@dragon-forge',
+    '@crystal-architect',
+    '@void-gazer',
+    '@ocean-memory',
+    '@mountain-builder',
+    '@phoenix-artisan',
+    '@mirror-reflector'
+  ]).describe('Guardian agent name'),
+  task: z.string()
+    .min(5, 'Task description must be at least 5 characters')
+    .max(500, 'Task description must not exceed 500 characters')
+    .describe('Task for the Guardian'),
+  context: z.string().max(1000, 'Context must not exceed 1000 characters').optional().describe('Additional context')
 });
 
 const GetGuardianInfoSchema = z.object({
@@ -126,6 +147,11 @@ const GetGuardianInfoSchema = z.object({
 async function generateArcaneaVisual(args: z.infer<typeof GenerateArcaneaVisualSchema>) {
   try {
     const { description, guardian, elemental, style, resolution, audience } = args;
+
+    // Sanitize description to prevent prompt injection
+    const sanitizedDescription = description
+      .replace(/[<>]/g, '') // Remove potential HTML tags
+      .trim();
     
     // Select Guardian agent
     const selectedGuardian = guardian ? GUARDIAN_AGENTS[guardian as keyof typeof GUARDIAN_AGENTS] : null;
@@ -136,7 +162,7 @@ async function generateArcaneaVisual(args: z.infer<typeof GenerateArcaneaVisualS
     
     // Construct transcendent prompt
     const enhancedPrompt = `
-Create a transcendent architecture visual for: ${description}
+Create a transcendent architecture visual for: ${sanitizedDescription}
 
 Arcanea Guardian Enhancement:
 ${selectedGuardian ? `- Primary Guardian: ${guardian} (${selectedGuardian.specialty})
@@ -203,7 +229,7 @@ Generate a premium, presentation-quality visual that transcends ordinary diagram
         style,
         resolution,
         audience,
-        description,
+        description: sanitizedDescription,
         enhanced: true,
         timestamp: new Date().toISOString()
       }

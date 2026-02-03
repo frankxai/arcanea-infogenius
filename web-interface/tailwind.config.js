@@ -21,17 +21,35 @@ export default {
         'accent-medium': '#747775',
         'accent-blue': '#1A73E8',
         
-        // Arcanea Transcendent Gradients
-        'transcendent': {
-          'fire': 'linear-gradient(135deg, #FF6B35 0%, #FF8C42 50%, #FFD23F 100%)',
-          'water': 'linear-gradient(135deg, #2E86AB 0%, #5DADE2 50%, #98D8C8 100%)',
-          'earth': 'linear-gradient(135deg, #4A5759 0%, #8B7355 50%, #A67C52 100%)',
-          'wind': 'linear-gradient(135deg, #98D8C8 0%, #B4E7CE 50%, #D4F1F4 100%)',
-          'void': 'linear-gradient(135deg, #1A1A2E 0%, #16213E 50%, #0F3460 100%)'
+        // Arcanea Transcendent Colors - supporting gradients via backgroundImage
+        'transcendent-fire': {
+          from: '#FF6B35',
+          via: '#FF8C42',
+          to: '#FFD23F'
+        },
+        'transcendent-water': {
+          from: '#2E86AB',
+          via: '#5DADE2',
+          to: '#98D8C8'
+        },
+        'transcendent-earth': {
+          from: '#4A5759',
+          via: '#8B7355',
+          to: '#A67C52'
+        },
+        'transcendent-wind': {
+          from: '#98D8C8',
+          via: '#B4E7CE',
+          to: '#D4F1F4'
+        },
+        'transcendent-void': {
+          from: '#1A1A2E',
+          via: '#16213E',
+          to: '#0F3460'
         }
       },
       fontFamily: {
-        'arcania': ['"Inter"', "Poppins", "system-ui", "sans-serif"],
+        'arcanea': ['"Inter"', "Poppins", "system-ui", "sans-serif"],
         'mythic': ['"Georgia"', "Times New Roman", "serif"],
         'runic': ['"JetBrains Mono"', "Consolas", "monospace"]
       },

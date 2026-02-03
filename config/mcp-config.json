@@ -4,16 +4,15 @@
       "command": "npx",
       "args": ["@bigcookie/mcp-nano-banana-image"],
       "env": {
-        "GEMINI_API_KEY": "your-api-key-here",
-        "MODEL": "gemini-3-pro-image",
-        "DEFAULT_RESOLUTION": "high"
+        "GEMINI_API_KEY": "${GEMINI_API_KEY}"
       },
-      "description": "Gemini 3 Pro image generation via Nano Banana MCP"
+      "description": "Gemini 3 Pro image generation - Set GEMINI_API_KEY env var"
     }
   },
   "defaults": {
     "model": "gemini-3-pro-image",
     "resolution": "high",
     "guardian": "auto"
-  }
+  },
+  "_note": "Get your API key at https://aistudio.google.com/apikey"
 }

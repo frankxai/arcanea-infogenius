@@ -117,7 +117,32 @@ Different visual styles for different needs:
 
 ---
 
-## Examples
+## Example Gallery
+
+### Generated with InfoGenius + Gemini 2.5 Flash Image
+
+<div align="center">
+
+| Starlight Orchestrator | Guardian Council |
+|:---:|:---:|
+| ![Starlight Orchestrator](examples/starlight-orchestrator.png) | ![Guardian Council](examples/guardian-council.png) |
+| *ACOS v6.0 Central Hub* | *5 AI Guardians in Pentagon Formation* |
+
+| FrankX Superintelligent System | Arcanea Intelligence OS |
+|:---:|:---:|
+| ![FrankX System](examples/frankx-superintelligent-system.png) | ![Arcanea Ecosystem](examples/arcanea-ecosystem.png) |
+| *Phoenix + 96 Skills, 45 Agents, 42 Commands* | *Floating Island Architecture* |
+
+| Golden Age Co-Creation | Content Factory |
+|:---:|:---:|
+| ![Golden Age](examples/golden-age-cocreation.png) | ![Content Factory](examples/creation-pipeline.png) |
+| *Human Vision × AI Capability* | *Isometric Creation Pipeline* |
+
+</div>
+
+---
+
+## Usage Examples
 
 ### Technical Architecture
 ```bash

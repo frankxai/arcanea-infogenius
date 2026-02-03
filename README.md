@@ -119,26 +119,49 @@ Different visual styles for different needs:
 
 ## Example Gallery
 
-### Generated with InfoGenius + Gemini 2.5 Flash Image
+### V2: Guardian-Enhanced (6-Layer Prompt Architecture)
+
+<div align="center">
+
+| FrankX Superintelligent System | Arcanea Intelligence OS |
+|:---:|:---:|
+| ![FrankX System v2](examples/v2-frankx-system.png) | ![Arcanea Ecosystem v2](examples/v2-arcanea-ecosystem.png) |
+| *Dragon Forge Guardian • Epic Style* | *Crystal Architect Guardian • Isometric Style* |
+| Phoenix rising with 96 skills, 45 agents, 42 commands | Floating island architecture with connected platforms |
+
+| Golden Age of Co-Creation | |
+|:---:|:---:|
+| ![Golden Age v2](examples/v2-golden-age.png) | |
+| *Vision Artist Guardian • Transcendent Style* | |
+| Human creator with 7 AI spirit forms in double helix | |
+
+</div>
+
+### V1: Basic Generation (for comparison)
 
 <div align="center">
 
 | Starlight Orchestrator | Guardian Council |
 |:---:|:---:|
 | ![Starlight Orchestrator](examples/starlight-orchestrator.png) | ![Guardian Council](examples/guardian-council.png) |
-| *ACOS v6.0 Central Hub* | *5 AI Guardians in Pentagon Formation* |
+| *Basic prompt* | *Basic prompt* |
 
-| FrankX Superintelligent System | Arcanea Intelligence OS |
+| Content Factory | |
 |:---:|:---:|
-| ![FrankX System](examples/frankx-superintelligent-system.png) | ![Arcanea Ecosystem](examples/arcanea-ecosystem.png) |
-| *Phoenix + 96 Skills, 45 Agents, 42 Commands* | *Floating Island Architecture* |
-
-| Golden Age Co-Creation | Content Factory |
-|:---:|:---:|
-| ![Golden Age](examples/golden-age-cocreation.png) | ![Content Factory](examples/creation-pipeline.png) |
-| *Human Vision × AI Capability* | *Isometric Creation Pipeline* |
+| ![Content Factory](examples/creation-pipeline.png) | |
+| *Basic prompt* | |
 
 </div>
+
+### What Changed: V1 → V2
+
+| Aspect | V1 (Raw Prompt) | V2 (Guardian-Enhanced) |
+|--------|-----------------|------------------------|
+| **Prompt** | Single description | 6-layer composed prompt |
+| **Style** | Generic | Guardian-specific (Dragon Forge, Crystal Architect, Vision Artist) |
+| **Colors** | Random | Guardian color palette (#FF4500, #FFD700, etc.) |
+| **Composition** | Default | Style-specific (rule of thirds, isometric grid, sacred geometry) |
+| **Quality** | Variable | Consistent premium with quality directives |
 
 ---
 

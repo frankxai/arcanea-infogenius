@@ -10,504 +10,356 @@ import { GoogleGenAI } from '@google/genai';
 import { z } from 'zod';
 import dotenv from 'dotenv';
 
-// Load environment variables
 dotenv.config();
 
-// Guardian Agent definitions
-const GUARDIAN_AGENTS = {
+// ============================================================================
+// GUARDIAN SYSTEM v4 — Concrete Visual Direction (Not Abstract Concepts)
+//
+// Each Guardian maps to specific PHOTOGRAPHIC and ART DIRECTION parameters.
+// This is the key insight: Gemini 3 Pro responds to photographer-style
+// direction, not abstract "elemental wisdom" keywords.
+// ============================================================================
+
+const GUARDIANS: Record<string, {
+  name: string;
+  camera: string;       // Camera/lens direction
+  lighting: string;     // Lighting setup
+  palette: string[];    // Actual hex colors to use
+  composition: string;  // Composition technique
+  texture: string;      // Material/surface quality
+  mood: string;         // Atmospheric direction
+}> = {
   '@vision-artist': {
-    element: 'wind',
-    specialty: 'Visual aesthetics and artistic composition',
-    color: '#98D8C8',
-    enhancement: 'Ethereal beauty with technical precision'
+    name: 'Vision Artist',
+    camera: 'Wide-angle establishing shot, shallow depth of field f/2.8, slight dutch angle for dynamism',
+    lighting: 'Golden hour rim lighting with soft ambient fill, volumetric light rays through atmosphere',
+    palette: ['#98D8C8', '#FFD700', '#E8E0D4', '#2D1B69'],
+    composition: 'Golden ratio spiral, subject at power point, leading lines converging to focal point',
+    texture: 'Polished glass and brushed metal surfaces, holographic iridescence on edges',
+    mood: 'Cinematic premium feel, like a high-end product launch keynote'
   },
   '@dragon-forge': {
-    element: 'fire',
-    specialty: 'Bold transformation and creative destruction',
-    color: '#FF6B35',
-    enhancement: 'Fiery energy with calculated risk-taking'
+    name: 'Dragon Forge',
+    camera: 'Low-angle hero shot looking up, 24mm wide lens, dramatic perspective distortion',
+    lighting: 'Strong backlight with ember particles, warm key light from below, deep shadows',
+    palette: ['#FF6B35', '#FF8C42', '#FFD23F', '#1A0A00'],
+    composition: 'Triangular power composition, subject dominating upper frame, energy radiating outward',
+    texture: 'Molten metal, volcanic glass, glowing cracks revealing inner fire',
+    mood: 'Epic and powerful, like a forge creating something legendary'
   },
   '@crystal-architect': {
-    element: 'earth',
-    specialty: 'Systematic design and structural clarity',
-    color: '#4A5759',
-    enhancement: 'Geometric precision with multifaceted clarity'
+    name: 'Crystal Architect',
+    camera: 'Isometric 30-degree angle, orthographic perspective, clean geometric framing',
+    lighting: 'Soft diffused studio lighting, no harsh shadows, even illumination across all surfaces',
+    palette: ['#4A5759', '#DAA520', '#E8E0D4', '#1C2833'],
+    composition: 'Grid-based layout, clear hierarchy, modular blocks with precise spacing',
+    texture: 'Crystalline facets, architectural concrete, precision-cut glass, frosted surfaces',
+    mood: 'Technical precision meets architectural beauty, like a Zaha Hadid render'
   },
   '@void-gazer': {
-    element: 'void',
-    specialty: 'Innovation and future possibilities',
-    color: '#1A1A2E',
-    enhancement: 'Mysterious depth with infinite possibilities'
+    name: 'Void Gazer',
+    camera: 'Extreme wide shot pulling back to reveal scale, 14mm ultra-wide, deep depth of field',
+    lighting: 'Bioluminescent glow from within, cool blue-purple ambient, point lights like distant stars',
+    palette: ['#1A1A2E', '#0F3460', '#7B2FBE', '#00D4FF'],
+    composition: 'Radial symmetry emanating from center void, fibonacci spiral, infinite depth layers',
+    texture: 'Dark matter nebula, quantum particle fields, glass-smooth surfaces with internal glow',
+    mood: 'Awe-inspiring cosmic scale, like looking into the birth of a universe'
   },
   '@ocean-memory': {
-    element: 'water',
-    specialty: 'Deep wisdom and emotional intelligence',
-    color: '#2E86AB',
-    enhancement: 'Fluid depth with profound insight'
-  },
-  '@mountain-builder': {
-    element: 'earth',
-    specialty: 'Enduring foundations and stability',
-    color: '#8B7355',
-    enhancement: 'Steady strength with unwavering reliability'
-  },
-  '@phoenix-artisan': {
-    element: 'fire',
-    specialty: 'Rebirth through artistic transformation',
-    color: '#FF8C42',
-    enhancement: 'Cyclical wisdom with renewed vision'
-  },
-  '@mirror-reflector': {
-    element: 'water',
-    specialty: 'Authentic voice and clarity',
-    color: '#5DADE2',
-    enhancement: 'Clear reflection with honest truth'
+    name: 'Ocean Memory',
+    camera: 'Eye-level medium shot, 50mm natural perspective, gentle tilt shift for miniature effect',
+    lighting: 'Soft caustic light patterns as if underwater, cool ambient with warm accent highlights',
+    palette: ['#2E86AB', '#5DADE2', '#98D8C8', '#0A1628'],
+    composition: 'Flowing S-curve through frame, layered depth planes, organic asymmetry',
+    texture: 'Fluid mercury surfaces, crystallized water, translucent layered glass',
+    mood: 'Deep and contemplative, like an aquarium of living data'
   }
 };
 
-// Elemental color mappings
-const ELEMENTAL_COLORS = {
-  fire: ['#FF6B35', '#FF8C42', '#FFD23F'],    // Transformation, passion, illumination
-  water: ['#2E86AB', '#5DADE2', '#98D8C8'],   // Wisdom, clarity, flow
-  earth: ['#4A5759', '#8B7355', '#A67C52'],   // Stability, foundation, structure
-  wind: ['#98D8C8', '#B4E7CE', '#D4F1F4'],   // Communication, freedom, clarity
-  void: ['#1A1A2E', '#16213E', '#0F3460']     // Mystery, innovation, potential
-};
+// ============================================================================
+// STYLE PRESETS — Concrete Art Direction (Not Vague Adjectives)
+// ============================================================================
 
-// Enterprise brand colors - Used in prompt generation
-const _ENTERPRISE_COLORS = {
-  primary: '#C74634',     // Enterprise Red
-  text: '#312D2A',        // Enterprise Black
-  background: '#FFFFFF',   // White
-  light_gray: '#F5F5F5',   // Light Gray
-  medium_gray: '#747775',  // Medium Gray
-  blue_accent: '#1A73E8'   // Blue Accent
-};
-
-// Exported for potential future use
-export { _ENTERPRISE_COLORS as ENTERPRISE_COLORS };
-
-// Create server
-const server = new Server(
-  {
-    name: 'arcanea-infogenius-mcp',
-    version: '1.0.0',
+const STYLES: Record<string, {
+  artDirection: string;
+  reference: string;
+  constraints: string;
+}> = {
+  'concept-art': {
+    artDirection: 'High-end concept art for a AAA game studio. Painterly digital illustration with photorealistic lighting.',
+    reference: 'Style reference: Beeple daily renders meets Apple product photography',
+    constraints: 'Clean composition, no text, no UI elements, pure visual storytelling'
   },
-  {
-    capabilities: {
-      tools: {},
-    },
+  'technical': {
+    artDirection: 'Clean technical illustration. Flat design with selective 3D elements. Infographic quality.',
+    reference: 'Style reference: Stripe documentation illustrations meets Bloomberg terminal aesthetics',
+    constraints: 'Minimal palette, clear hierarchy, readable at any size, professional'
+  },
+  'isometric': {
+    artDirection: 'Detailed isometric 3D render. Miniature world diorama style with tilt-shift depth of field.',
+    reference: 'Style reference: Monument Valley game art meets architectural model photography',
+    constraints: 'Strict 30-degree isometric, consistent scale, warm directional lighting'
+  },
+  'cinematic': {
+    artDirection: 'Cinematic widescreen composition. Film grain, anamorphic lens flares, dramatic color grading.',
+    reference: 'Style reference: Blade Runner 2049 cinematography meets NASA deep space imagery',
+    constraints: '21:9 cinematic feel even in square, dramatic contrast, atmospheric depth'
+  },
+  'premium': {
+    artDirection: 'Ultra-premium product visualization. Studio-lit floating elements on dark gradient.',
+    reference: 'Style reference: Apple keynote hero shots meets luxury brand advertising',
+    constraints: 'Dark background, selective highlights, glass/metal materials, editorial quality'
   }
-);
+};
 
-// Initialize Google GenAI
+// ============================================================================
+// PROMPT COMPOSER v4 — Narrative Description (Not Keyword Lists)
+//
+// Based on 2026 Gemini 3 Pro best practices:
+// 1. Describe the scene narratively
+// 2. Think like a photographer (lens, aperture, lighting)
+// 3. Max 2-3 style elements
+// 4. Include subject, composition, action, location, style
+// 5. Target micro-contrast for perceived quality
+// ============================================================================
+
+function composePrompt(
+  description: string,
+  guardianKey: string | undefined,
+  styleName: string
+): string {
+  const guardian = guardianKey ? GUARDIANS[guardianKey] : GUARDIANS['@vision-artist'];
+  const style = STYLES[styleName] || STYLES['concept-art'];
+  const colors = guardian.palette;
+
+  // Build a narrative prompt — tell a story, don't list keywords
+  return [
+    // 1. SCENE NARRATIVE (What are we looking at?)
+    `A stunning ${style.artDirection}`,
+    ``,
+    `The scene depicts: ${description}`,
+    ``,
+    // 2. CAMERA & COMPOSITION (Think like a photographer)
+    `Camera: ${guardian.camera}.`,
+    `Composition: ${guardian.composition}.`,
+    ``,
+    // 3. LIGHTING & ATMOSPHERE (Max 2-3 elements)
+    `Lighting: ${guardian.lighting}.`,
+    `Atmosphere: ${guardian.mood}.`,
+    ``,
+    // 4. MATERIALS & TEXTURE (Micro-contrast for quality)
+    `Surfaces and materials: ${guardian.texture}.`,
+    `Color palette dominated by ${colors.slice(0, 3).join(', ')} against ${colors[colors.length - 1]} background.`,
+    ``,
+    // 5. STYLE REFERENCE (Concrete, not abstract)
+    `${style.reference}.`,
+    `${style.constraints}.`,
+    ``,
+    // 6. QUALITY DIRECTIVE (Short and specific)
+    `Render in 4K resolution with sharp detail, no artifacts, no text unless specifically requested. Photorealistic materials with cinematic color grading.`
+  ].join('\n');
+}
+
+// ============================================================================
+// MCP SERVER SETUP
+// ============================================================================
+
 if (!process.env.GEMINI_API_KEY) {
   console.error('ERROR: GEMINI_API_KEY environment variable is required');
-  console.error('Please set your API key in the .env file');
   process.exit(1);
 }
 
-const genAI = new GoogleGenAI({
-  apiKey: process.env.GEMINI_API_KEY,
-});
+const genAI = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
-// Tool definitions
-const GenerateArcaneaVisualSchema = z.object({
+const server = new Server(
+  { name: 'arcanea-infogenius', version: '4.0.0' },
+  { capabilities: { tools: {} } }
+);
+
+// ============================================================================
+// TOOL: generate_visual — The core generation tool
+// ============================================================================
+
+const GenerateVisualSchema = z.object({
   description: z.string()
     .min(10, 'Description must be at least 10 characters')
     .max(2000, 'Description must not exceed 2000 characters')
-    .describe('Visual description and requirements'),
-  guardian: z.string().optional().describe('Guardian agent to enhance the visual'),
-  elemental: z.enum(['fire', 'water', 'earth', 'wind', 'void']).optional().describe('Elemental influence'),
-  style: z.enum(['transcendent', 'technical', 'executive']).default('transcendent'),
-  resolution: z.enum(['4K', '1920x1080', '2560x1440']).default('1920x1080'),
-  audience: z.enum(['executive', 'technical', 'mixed']).default('mixed')
+    .describe('What to visualize — describe the scene narratively'),
+  guardian: z.string().optional()
+    .describe('Visual direction preset: @vision-artist, @dragon-forge, @crystal-architect, @void-gazer, @ocean-memory'),
+  style: z.enum(['concept-art', 'technical', 'isometric', 'cinematic', 'premium'])
+    .default('concept-art')
+    .describe('Art direction style preset'),
+  label: z.string().optional()
+    .describe('Optional text label to render on the image')
 });
 
-const InvokeGuardianSchema = z.object({
-  guardian: z.enum([
-    '@vision-artist',
-    '@dragon-forge',
-    '@crystal-architect',
-    '@void-gazer',
-    '@ocean-memory',
-    '@mountain-builder',
-    '@phoenix-artisan',
-    '@mirror-reflector'
-  ]).describe('Guardian agent name'),
-  task: z.string()
-    .min(5, 'Task description must be at least 5 characters')
-    .max(500, 'Task description must not exceed 500 characters')
-    .describe('Task for the Guardian'),
-  context: z.string().max(1000, 'Context must not exceed 1000 characters').optional().describe('Additional context')
-});
+async function generateVisual(args: z.infer<typeof GenerateVisualSchema>) {
+  const { description, guardian, style, label } = args;
 
-const GetGuardianInfoSchema = z.object({
-  guardian: z.string().optional().describe('Guardian agent name (optional, returns all if not provided)')
-});
+  const sanitized = description.replace(/[<>]/g, '').trim();
 
-// Tool implementations
-async function generateArcaneaVisual(args: z.infer<typeof GenerateArcaneaVisualSchema>) {
-  try {
-    const { description, guardian, elemental, style, resolution, audience } = args;
+  let prompt = composePrompt(sanitized, guardian, style);
 
-    // Sanitize description to prevent prompt injection
-    const sanitizedDescription = description
-      .replace(/[<>]/g, '') // Remove potential HTML tags
-      .trim();
-    
-    // Select Guardian agent
-    const selectedGuardian = guardian ? GUARDIAN_AGENTS[guardian as keyof typeof GUARDIAN_AGENTS] : null;
-    
-    // Determine elemental influence
-    const primaryElement = elemental || (selectedGuardian?.element || 'void');
-    const elementalColors = ELEMENTAL_COLORS[primaryElement as keyof typeof ELEMENTAL_COLORS];
-    
-    // Construct transcendent prompt
-    const enhancedPrompt = `
-Create a transcendent architecture visual for: ${sanitizedDescription}
-
-Arcanea Guardian Enhancement:
-${selectedGuardian ? `- Primary Guardian: ${guardian} (${selectedGuardian.specialty})
-- Guardian Enhancement: ${selectedGuardian.enhancement}
-- Elemental Color: ${selectedGuardian.color}` : '- Multiple Guardian influences woven throughout'}
-
-Visual Style:
-- Style Level: ${style}
-- Primary Element: ${primaryElement}
-- Elemental Palette: ${elementalColors.join(', ')}
-- Resolution: ${resolution}
-- Target Audience: ${audience}
-
-Enterprise Enterprise Foundation:
-- Primary: Enterprise Red (#C74634) for core enterprise services
-- Text: Enterprise Black (#312D2A) for labels and headers
-- Background: Clean white with subtle gradients
-- Typography: Enterprise Sans with Arcanea runic accents
-
-Transcendent Elements:
-- Mythical sigils and Guardian symbols integrated
-- Elemental energy streams representing data/flow
-- Multi-layered meaning with immediate clarity
-- Professional enterprise structure with mythical depth
-
-Layout Requirements:
-- Clean, hierarchical composition
-- Clear visual flow from primary to supporting elements
-- Balanced use of white space
-- Strategic placement of Guardian enhancements
-- Professional quality suitable for C-suite presentations
-
-Technical Excellence:
-- Accurate representation of architecture
-- Clear service relationships and dependencies
-- Modern design with subtle depth
-- High contrast for readability
-- Accessibility compliant (WCAG AA minimum)
-
-Generate a premium, presentation-quality visual that transcends ordinary diagrams while maintaining enterprise professionalism.
-`;
-
-    // Generate image using Google GenAI - Gemini 3 Pro for best quality
-    const model = process.env.INFOGENIUS_MODEL || 'gemini-3-pro-image-preview';
-    const response = await genAI.models.generateContent({
-      model: model,
-      contents: enhancedPrompt,
-      config: {
-        responseModalities: ['image', 'text']
-      }
-    });
-    
-    const image = response.candidates?.[0]?.content?.parts?.[0];
-    
-    if (!image || !('inlineData' in image)) {
-      throw new Error('Failed to generate image');
-    }
-
-    return {
-      success: true,
-      image: image.inlineData?.data,
-      metadata: {
-        guardian: guardian || 'Multiple Guardians',
-        element: primaryElement,
-        style,
-        resolution,
-        audience,
-        description: sanitizedDescription,
-        enhanced: true,
-        timestamp: new Date().toISOString()
-      }
-    };
-
-  } catch (error) {
-    console.error('Error generating Arcanea visual:', error);
-    return {
-      success: false,
-      error: error instanceof Error ? error.message : 'Unknown error'
-    };
+  // Add label if requested
+  if (label) {
+    prompt += `\n\nIMPORTANT: Render the text "${label}" in a clean, modern sans-serif font (white with subtle drop shadow) in the bottom-right corner of the image.`;
   }
-}
 
-function invokeGuardian(args: z.infer<typeof InvokeGuardianSchema>) {
-  try {
-    const { guardian, task, context } = args;
-    const guardianInfo = GUARDIAN_AGENTS[guardian as keyof typeof GUARDIAN_AGENTS];
-    
-    if (!guardianInfo) {
-      throw new Error(`Unknown Guardian agent: ${guardian}`);
+  const model = process.env.INFOGENIUS_MODEL || 'gemini-3-pro-image-preview';
+
+  const response = await genAI.models.generateContent({
+    model,
+    contents: prompt,
+    config: { responseModalities: ['image', 'text'] }
+  });
+
+  const parts = response.candidates?.[0]?.content?.parts;
+  if (!parts) throw new Error('No response from model');
+
+  for (const part of parts) {
+    if ('inlineData' in part && part.inlineData) {
+      return {
+        success: true,
+        image: part.inlineData.data,
+        mimeType: part.inlineData.mimeType || 'image/png',
+        metadata: {
+          model,
+          guardian: guardian || '@vision-artist',
+          style,
+          promptLength: prompt.length,
+          timestamp: new Date().toISOString()
+        },
+        prompt // Return prompt for debugging/learning
+      };
     }
-
-    // Simulate Guardian intelligence processing
-    const guardianResponse = `
-Guardian ${guardian} responds to: "${task}"
-
-${guardianInfo.specialty} - ${guardianInfo.enhancement}
-
-Wisdom:
-${context ? `Context: ${context}\n\n` : ''}As ${guardian}, I approach this task with ${guardianInfo.element} elemental wisdom.
-${generateGuardianWisdom(guardian, task, guardianInfo.element)}
-
-Elemental Guidance: ${guardianInfo.color}
-Recommended Action: ${generateGuardianAction(guardian, task)}
-`;
-
-    return {
-      success: true,
-      guardian,
-      response: guardianResponse,
-      element: guardianInfo.element,
-      color: guardianInfo.color
-    };
-
-  } catch (error) {
-    console.error('Error invoking Guardian:', error);
-    return {
-      success: false,
-      error: error instanceof Error ? error.message : 'Unknown error'
-    };
   }
+
+  throw new Error('No image data in response');
 }
 
-function generateGuardianWisdom(guardian: string, task: string, element: string): string {
-  const wisdomTemplates = {
-    fire: [
-      "Transform this challenge into an opportunity for bold innovation.",
-      "Apply passionate focus to burn away obstacles.",
-      "Channel creative energy to forge new pathways."
-    ],
-    water: [
-      "Flow around obstacles with adaptive wisdom.",
-      "Dive deep into the emotional intelligence of this situation.",
-      "Reflect on the patterns beneath the surface."
-    ],
-    earth: [
-      "Build stable foundations that can weather any storm.",
-      "Ground your approach in proven principles.",
-      "Cultivate patient growth through systematic effort."
-    ],
-    wind: [
-      "Communicate your vision with clarity and purpose.",
-      "Adapt your approach to the changing currents.",
-      "Bring fresh perspective to clear away confusion."
-    ],
-    void: [
-      "Embrace the unknown as a canvas for infinite possibility.",
-      "Transcend conventional thinking to discover breakthrough solutions.",
-      "Access the quantum field of potential outcomes."
-    ]
-  };
+// ============================================================================
+// TOOL: get_guardians — List available visual direction presets
+// ============================================================================
 
-  const templates = wisdomTemplates[element as keyof typeof wisdomTemplates] || wisdomTemplates.void;
-  return templates[Math.floor(Math.random() * templates.length)];
-}
-
-function generateGuardianAction(guardian: string, _task: string): string {
-  const actions = {
-    '@vision-artist': 'Apply aesthetic composition and symbolic depth',
-    '@dragon-forge': 'Implement bold transformation with calculated risks',
-    '@crystal-architect': 'Create systematic structure with precise clarity',
-    '@void-gazer': 'Explore innovative paradigms beyond conventional limits',
-    '@ocean-memory': 'Access deep wisdom and emotional intelligence',
-    '@mountain-builder': 'Establish enduring foundations and stability',
-    '@phoenix-artisan': 'Transform through artistic rebirth and renewal',
-    '@mirror-reflector': 'Provide honest reflection and authentic clarity'
-  };
-
-  return actions[guardian as keyof typeof actions] || 'Apply Guardian wisdom to enhance outcomes';
-}
-
-function getGuardianInfo(args: z.infer<typeof GetGuardianInfoSchema>) {
-  try {
-    const { guardian } = args;
-    
-    if (guardian) {
-      const info = GUARDIAN_AGENTS[guardian as keyof typeof GUARDIAN_AGENTS];
-      if (!info) {
-        throw new Error(`Unknown Guardian agent: ${guardian}`);
-      }
-      return { [guardian]: info };
-    }
-    
-    return GUARDIAN_AGENTS;
-
-  } catch (error) {
-    console.error('Error getting Guardian info:', error);
-    return {
-      success: false,
-      error: error instanceof Error ? error.message : 'Unknown error'
-    };
+function getGuardians(guardianKey?: string) {
+  if (guardianKey && GUARDIANS[guardianKey]) {
+    return { [guardianKey]: GUARDIANS[guardianKey] };
   }
+  return GUARDIANS;
 }
 
-// Register tools
-server.setRequestHandler(ListToolsRequestSchema, () => {
-  return {
-    tools: [
-      {
-        name: 'generate_arcanea_visual',
-        description: 'Generate transcendent Arcanea visuals with Guardian AI enhancement',
-        inputSchema: {
-          type: 'object',
-          properties: {
-            description: {
-              type: 'string',
-              description: 'Visual description and requirements'
-            },
-            guardian: {
-              type: 'string',
-              description: 'Guardian agent to enhance the visual',
-              enum: Object.keys(GUARDIAN_AGENTS)
-            },
-            elemental: {
-              type: 'string',
-              description: 'Elemental influence',
-              enum: ['fire', 'water', 'earth', 'wind', 'void']
-            },
-            style: {
-              type: 'string',
-              description: 'Visual style level',
-              enum: ['transcendent', 'technical', 'executive'],
-              default: 'transcendent'
-            },
-            resolution: {
-              type: 'string',
-              description: 'Output resolution',
-              enum: ['4K', '1920x1080', '2560x1440'],
-              default: '1920x1080'
-            },
-            audience: {
-              type: 'string',
-              description: 'Target audience',
-              enum: ['executive', 'technical', 'mixed'],
-              default: 'mixed'
-            }
+// ============================================================================
+// TOOL: get_styles — List available style presets
+// ============================================================================
+
+function getStyles(styleName?: string) {
+  if (styleName && STYLES[styleName]) {
+    return { [styleName]: STYLES[styleName] };
+  }
+  return STYLES;
+}
+
+// ============================================================================
+// REGISTER TOOLS
+// ============================================================================
+
+server.setRequestHandler(ListToolsRequestSchema, () => ({
+  tools: [
+    {
+      name: 'generate_visual',
+      description: 'Generate a high-quality visual using Gemini 3 Pro with photographer-style art direction. Describe your scene narratively for best results.',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          description: {
+            type: 'string',
+            description: 'Narrative description of the scene to visualize'
           },
-          required: ['description']
-        }
-      },
-      {
-        name: 'invoke_guardian',
-        description: 'Invoke Arcanea Guardian AI intelligence for guidance',
-        inputSchema: {
-          type: 'object',
-          properties: {
-            guardian: {
-              type: 'string',
-              description: 'Guardian agent name',
-              enum: Object.keys(GUARDIAN_AGENTS)
-            },
-            task: {
-              type: 'string',
-              description: 'Task for the Guardian'
-            },
-            context: {
-              type: 'string',
-              description: 'Additional context'
-            }
+          guardian: {
+            type: 'string',
+            description: 'Visual direction preset',
+            enum: Object.keys(GUARDIANS)
           },
-          required: ['guardian', 'task']
-        }
-      },
-      {
-        name: 'get_guardian_info',
-        description: 'Get information about Arcanea Guardian agents',
-        inputSchema: {
-          type: 'object',
-          properties: {
-            guardian: {
-              type: 'string',
-              description: 'Guardian agent name (optional, returns all if not provided)',
-              enum: Object.keys(GUARDIAN_AGENTS)
-            }
+          style: {
+            type: 'string',
+            description: 'Art direction style',
+            enum: Object.keys(STYLES),
+            default: 'concept-art'
+          },
+          label: {
+            type: 'string',
+            description: 'Optional text to render on the image'
+          }
+        },
+        required: ['description']
+      }
+    },
+    {
+      name: 'get_guardians',
+      description: 'List available Guardian visual direction presets with camera, lighting, and composition details',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          guardian: {
+            type: 'string',
+            description: 'Specific guardian to query',
+            enum: Object.keys(GUARDIANS)
           }
         }
       }
-    ]
-  };
-});
+    },
+    {
+      name: 'get_styles',
+      description: 'List available art direction style presets',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          style: {
+            type: 'string',
+            description: 'Specific style to query',
+            enum: Object.keys(STYLES)
+          }
+        }
+      }
+    }
+  ]
+}));
 
 server.setRequestHandler(CallToolRequestSchema, async (request) => {
   const { name, arguments: args } = request.params;
 
   try {
     switch (name) {
-      case 'generate_arcanea_visual': {
-        const result = await generateArcaneaVisual(GenerateArcaneaVisualSchema.parse(args));
-        return {
-          content: [
-            {
-              type: 'text',
-              text: JSON.stringify(result, null, 2)
-            }
-          ]
-        };
+      case 'generate_visual': {
+        const result = await generateVisual(GenerateVisualSchema.parse(args));
+        return { content: [{ type: 'text', text: JSON.stringify(result, null, 2) }] };
       }
-
-      case 'invoke_guardian': {
-        const guardianResult = invokeGuardian(InvokeGuardianSchema.parse(args));
-        return {
-          content: [
-            {
-              type: 'text',
-              text: JSON.stringify(guardianResult, null, 2)
-            }
-          ]
-        };
+      case 'get_guardians': {
+        const guardians = getGuardians(args?.guardian as string | undefined);
+        return { content: [{ type: 'text', text: JSON.stringify(guardians, null, 2) }] };
       }
-
-      case 'get_guardian_info': {
-        const infoResult = getGuardianInfo(GetGuardianInfoSchema.parse(args));
-        return {
-          content: [
-            {
-              type: 'text',
-              text: JSON.stringify(infoResult, null, 2)
-            }
-          ]
-        };
+      case 'get_styles': {
+        const styles = getStyles(args?.style as string | undefined);
+        return { content: [{ type: 'text', text: JSON.stringify(styles, null, 2) }] };
       }
-
       default:
         throw new Error(`Unknown tool: ${name}`);
     }
   } catch (error) {
-    const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
-    return {
-      content: [
-        {
-          type: 'text',
-          text: JSON.stringify({ success: false, error: errorMessage }, null, 2)
-        }
-      ]
-    };
+    const message = error instanceof Error ? error.message : 'Unknown error';
+    return { content: [{ type: 'text', text: JSON.stringify({ success: false, error: message }) }] };
   }
 });
 
-// Start server
+// ============================================================================
+// START
+// ============================================================================
+
 async function main() {
   const transport = new StdioServerTransport();
   await server.connect(transport);
-  console.error('Arcanea InfoGenius MCP server running on stdio');
+  console.error('InfoGenius v4.0 MCP server running');
 }
 
 main().catch((error) => {

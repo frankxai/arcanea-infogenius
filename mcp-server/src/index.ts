@@ -75,7 +75,7 @@ const ELEMENTAL_COLORS = {
 };
 
 // Enterprise brand colors - Used in prompt generation
-const ENTERPRISE_COLORS = {
+const _ENTERPRISE_COLORS = {
   primary: '#C74634',     // Enterprise Red
   text: '#312D2A',        // Enterprise Black
   background: '#FFFFFF',   // White
@@ -84,8 +84,8 @@ const ENTERPRISE_COLORS = {
   blue_accent: '#1A73E8'   // Blue Accent
 };
 
-// Mark as used (referenced in prompt template comments)
-void ENTERPRISE_COLORS;
+// Exported for potential future use
+export { _ENTERPRISE_COLORS as ENTERPRISE_COLORS };
 
 // Create server
 const server = new Server(

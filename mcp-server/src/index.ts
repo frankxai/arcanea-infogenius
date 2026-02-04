@@ -208,9 +208,10 @@ Technical Excellence:
 Generate a premium, presentation-quality visual that transcends ordinary diagrams while maintaining enterprise professionalism.
 `;
 
-    // Generate image using Google GenAI
+    // Generate image using Google GenAI - Gemini 3 Pro for best quality
+    const model = process.env.INFOGENIUS_MODEL || 'gemini-3-pro-image-preview';
     const response = await genAI.models.generateContent({
-      model: 'gemini-2.0-flash-exp-image-generation',
+      model: model,
       contents: enhancedPrompt,
       config: {
         responseModalities: ['image', 'text']

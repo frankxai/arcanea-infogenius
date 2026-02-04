@@ -74,7 +74,7 @@ const ELEMENTAL_COLORS = {
   void: ['#1A1A2E', '#16213E', '#0F3460']     // Mystery, innovation, potential
 };
 
-// Enterprise brand colors
+// Enterprise brand colors - Used in prompt generation
 const ENTERPRISE_COLORS = {
   primary: '#C74634',     // Enterprise Red
   text: '#312D2A',        // Enterprise Black
@@ -83,6 +83,9 @@ const ENTERPRISE_COLORS = {
   medium_gray: '#747775',  // Medium Gray
   blue_accent: '#1A73E8'   // Blue Accent
 };
+
+// Mark as used (referenced in prompt template comments)
+void ENTERPRISE_COLORS;
 
 // Create server
 const server = new Server(
@@ -244,7 +247,7 @@ Generate a premium, presentation-quality visual that transcends ordinary diagram
   }
 }
 
-async function invokeGuardian(args: z.infer<typeof InvokeGuardianSchema>) {
+function invokeGuardian(args: z.infer<typeof InvokeGuardianSchema>) {
   try {
     const { guardian, task, context } = args;
     const guardianInfo = GUARDIAN_AGENTS[guardian as keyof typeof GUARDIAN_AGENTS];
@@ -317,7 +320,7 @@ function generateGuardianWisdom(guardian: string, task: string, element: string)
   return templates[Math.floor(Math.random() * templates.length)];
 }
 
-function generateGuardianAction(guardian: string, task: string): string {
+function generateGuardianAction(guardian: string, _task: string): string {
   const actions = {
     '@vision-artist': 'Apply aesthetic composition and symbolic depth',
     '@dragon-forge': 'Implement bold transformation with calculated risks',
@@ -332,7 +335,7 @@ function generateGuardianAction(guardian: string, task: string): string {
   return actions[guardian as keyof typeof actions] || 'Apply Guardian wisdom to enhance outcomes';
 }
 
-async function getGuardianInfo(args: z.infer<typeof GetGuardianInfoSchema>) {
+function getGuardianInfo(args: z.infer<typeof GetGuardianInfoSchema>) {
   try {
     const { guardian } = args;
     
@@ -356,7 +359,7 @@ async function getGuardianInfo(args: z.infer<typeof GetGuardianInfoSchema>) {
 }
 
 // Register tools
-server.setRequestHandler(ListToolsRequestSchema, async () => {
+server.setRequestHandler(ListToolsRequestSchema, () => {
   return {
     tools: [
       {
@@ -447,7 +450,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
 
   try {
     switch (name) {
-      case 'generate_arcanea_visual':
+      case 'generate_arcanea_visual': {
         const result = await generateArcaneaVisual(GenerateArcaneaVisualSchema.parse(args));
         return {
           content: [
@@ -457,9 +460,10 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
             }
           ]
         };
+      }
 
-      case 'invoke_guardian':
-        const guardianResult = await invokeGuardian(InvokeGuardianSchema.parse(args));
+      case 'invoke_guardian': {
+        const guardianResult = invokeGuardian(InvokeGuardianSchema.parse(args));
         return {
           content: [
             {
@@ -468,9 +472,10 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
             }
           ]
         };
+      }
 
-      case 'get_guardian_info':
-        const infoResult = await getGuardianInfo(GetGuardianInfoSchema.parse(args));
+      case 'get_guardian_info': {
+        const infoResult = getGuardianInfo(GetGuardianInfoSchema.parse(args));
         return {
           content: [
             {
@@ -479,6 +484,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
             }
           ]
         };
+      }
 
       default:
         throw new Error(`Unknown tool: ${name}`);

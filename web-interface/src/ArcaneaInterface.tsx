@@ -13,7 +13,6 @@ import {
   Dragon,
   Waves,
   Mountain,
-  Wind,
   Circle
 } from 'lucide-react';
 
@@ -100,7 +99,6 @@ interface GeneratedImage {
 const ArcaneaInterface: React.FC = () => {
   const [topic, setTopic] = useState('');
   const [selectedGuardian, setSelectedGuardian] = useState('');
-  const [selectedElement, setSelectedElement] = useState('');
   const [visualStyle, setVisualStyle] = useState('transcendent');
   const [resolution, setResolution] = useState('1920x1080');
   const [audience, setAudience] = useState('mixed');
@@ -135,7 +133,7 @@ const ArcaneaInterface: React.FC = () => {
         body: JSON.stringify({
           description: topic,
           guardian: selectedGuardian,
-          elemental: selectedElement,
+          elemental: selectedGuardianData?.element,
           style: visualStyle,
           resolution,
           audience
@@ -156,7 +154,7 @@ const ArcaneaInterface: React.FC = () => {
         url: result.image?.url || `/api/mock-image?${Date.now()}`,
         description: topic,
         guardian: selectedGuardian || 'Multiple Guardians',
-        element: selectedElement || 'void',
+        element: selectedGuardianData?.element || 'void',
         style: visualStyle,
         resolution,
         timestamp: new Date().toISOString(),

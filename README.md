@@ -119,49 +119,58 @@ Different visual styles for different needs:
 
 ## Example Gallery
 
-### V2: Guardian-Enhanced (6-Layer Prompt Architecture)
+### V3: Imagen 4 Ultra (Best Quality)
 
 <div align="center">
 
 | FrankX Superintelligent System | Arcanea Intelligence OS |
 |:---:|:---:|
-| ![FrankX System v2](examples/v2-frankx-system.png) | ![Arcanea Ecosystem v2](examples/v2-arcanea-ecosystem.png) |
-| *Dragon Forge Guardian • Epic Style* | *Crystal Architect Guardian • Isometric Style* |
-| Phoenix rising with 96 skills, 45 agents, 42 commands | Floating island architecture with connected platforms |
+| ![FrankX System v3](examples/v3-frankx-system.png) | ![Arcanea Ecosystem v3](examples/v3-arcanea-ecosystem.png) |
+| *Imagen 4 Ultra • 8K Hyper-Detailed* | *Imagen 4 Ultra • Isometric* |
 
 | Golden Age of Co-Creation | |
 |:---:|:---:|
-| ![Golden Age v2](examples/v2-golden-age.png) | |
-| *Vision Artist Guardian • Transcendent Style* | |
-| Human creator with 7 AI spirit forms in double helix | |
+| ![Golden Age v3](examples/v3-golden-age.png) | |
+| *Imagen 4 Ultra • Cinematic* | |
 
 </div>
 
-### V1: Basic Generation (for comparison)
+### Version Comparison
 
-<div align="center">
+| Version | Model | Prompt Style | Quality | Cost |
+|---------|-------|--------------|---------|------|
+| V1 | gemini-2.5-flash-image | Raw basic | Low | $0.02 |
+| V2 | gemini-2.5-flash-image | 6-layer verbose | Medium | $0.02 |
+| **V3** | **imagen-4.0-ultra** | **Simple, specific** | **HIGH** | $0.06 |
+
+### What Makes V3 Better
+
+| Aspect | V1/V2 | V3 |
+|--------|-------|-----|
+| **Model** | Gemini Flash (fast/cheap) | Imagen 4 Ultra (best quality) |
+| **Prompts** | Abstract ("transcendent", "consciousness") | Concrete ("3D render", "isometric", "8K") |
+| **Style** | Verbose 6-layer | Short, specific art direction |
+| **Output** | Generic AI art | Professional concept art |
+
+### Earlier Versions (for reference)
+
+<details>
+<summary>V2: Guardian-Enhanced</summary>
+
+| FrankX System | Arcanea Ecosystem |
+|:---:|:---:|
+| ![v2](examples/v2-frankx-system.png) | ![v2](examples/v2-arcanea-ecosystem.png) |
+
+</details>
+
+<details>
+<summary>V1: Basic Generation</summary>
 
 | Starlight Orchestrator | Guardian Council |
 |:---:|:---:|
-| ![Starlight Orchestrator](examples/starlight-orchestrator.png) | ![Guardian Council](examples/guardian-council.png) |
-| *Basic prompt* | *Basic prompt* |
+| ![v1](examples/starlight-orchestrator.png) | ![v1](examples/guardian-council.png) |
 
-| Content Factory | |
-|:---:|:---:|
-| ![Content Factory](examples/creation-pipeline.png) | |
-| *Basic prompt* | |
-
-</div>
-
-### What Changed: V1 → V2
-
-| Aspect | V1 (Raw Prompt) | V2 (Guardian-Enhanced) |
-|--------|-----------------|------------------------|
-| **Prompt** | Single description | 6-layer composed prompt |
-| **Style** | Generic | Guardian-specific (Dragon Forge, Crystal Architect, Vision Artist) |
-| **Colors** | Random | Guardian color palette (#FF4500, #FFD700, etc.) |
-| **Composition** | Default | Style-specific (rule of thirds, isometric grid, sacred geometry) |
-| **Quality** | Variable | Consistent premium with quality directives |
+</details>
 
 ---
 

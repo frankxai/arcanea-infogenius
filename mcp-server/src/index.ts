@@ -109,6 +109,37 @@ const STYLES: Record<string, {
     artDirection: 'Ultra-premium product visualization. Studio-lit floating elements on dark gradient.',
     reference: 'Style reference: Apple keynote hero shots meets luxury brand advertising',
     constraints: 'Dark background, selective highlights, glass/metal materials, editorial quality'
+  },
+  // ---- Proven presets from frankxai/infogenius (Google AI Studio) ----
+  'minimalist': {
+    artDirection: 'Bauhaus Minimalist. Flat vector art, limited color palette (2-3 colors), reliance on negative space and simple geometric shapes.',
+    reference: 'Style reference: Dieter Rams design principles meets Swiss International Style',
+    constraints: 'Maximum 3 colors, no gradients, pure geometric forms, generous whitespace'
+  },
+  'realistic': {
+    artDirection: 'Photorealistic Composite. Cinematic lighting, 8k resolution, highly detailed textures. Looks like a photograph.',
+    reference: 'Style reference: National Geographic photography meets high-end CGI compositing',
+    constraints: 'Photorealistic materials, natural lighting, shallow depth of field, no stylization'
+  },
+  '3d-render': {
+    artDirection: '3D Isometric Render. Claymorphism or high-gloss plastic texture, studio lighting, soft shadows, looks like a physical model.',
+    reference: 'Style reference: Nintendo game art meets Pixar rendering quality',
+    constraints: 'Consistent isometric angle, soft ambient occlusion, toy-like tactile quality'
+  },
+  'futuristic': {
+    artDirection: 'Cyberpunk HUD. Glowing neon blue/cyan lines on dark background, holographic data visualization, 3D wireframes.',
+    reference: 'Style reference: Minority Report UI meets Tron Legacy aesthetics',
+    constraints: 'Dark background mandatory, neon accents only, tech/wireframe feel, no organic elements'
+  },
+  'vintage': {
+    artDirection: '19th Century Scientific Lithograph. Engraving style, sepia tones, textured paper background, fine hatch lines.',
+    reference: 'Style reference: Ernst Haeckel illustrations meets vintage patent drawings',
+    constraints: 'Sepia/brown tones only, cross-hatching texture, aged paper effect, no modern elements'
+  },
+  'sketch': {
+    artDirection: 'Da Vinci Notebook. Ink on parchment sketch, handwritten annotations style, rough but accurate lines.',
+    reference: 'Style reference: Leonardo da Vinci codex pages meets architectural blueprints',
+    constraints: 'Parchment background, ink-only rendering, mirror-text annotations welcome, technical accuracy'
   }
 };
 
@@ -187,7 +218,7 @@ const GenerateVisualSchema = z.object({
     .describe('What to visualize — describe the scene narratively'),
   guardian: z.string().optional()
     .describe('Visual direction preset: @vision-artist, @dragon-forge, @crystal-architect, @void-gazer, @ocean-memory'),
-  style: z.enum(['concept-art', 'technical', 'isometric', 'cinematic', 'premium'])
+  style: z.enum(['concept-art', 'technical', 'isometric', 'cinematic', 'premium', 'minimalist', 'realistic', '3d-render', 'futuristic', 'vintage', 'sketch'])
     .default('concept-art')
     .describe('Art direction style preset'),
   label: z.string().optional()

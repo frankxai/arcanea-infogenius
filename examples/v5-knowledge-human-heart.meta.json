@@ -1,0 +1,55 @@
+{
+  "topic": "The human cardiovascular system and how the heart pumps blood",
+  "style": "standard",
+  "audience": "highschool",
+  "research": {
+    "facts": [
+      "The human heart, an organ about the size of a clenched fist, pumps approximately 5-6 liters of blood per minute at rest, circulating over 7,500 liters (2,000 gallons) daily throughout the body.",
+      "The heart is divided into four distinct chambers: two upper receiving chambers called atria (right and left atrium) and two lower pumping chambers called ventricles (right and left ventricle).",
+      "Blood circulates through two major pathways: the pulmonary circulation, which moves deoxygenated blood from the heart to the lungs for oxygenation and returns oxygenated blood to the heart; and the systemic circulation, which carries oxygenated blood from the heart to the rest of the body and returns deoxygenated blood to the heart.",
+      "Four specialized valves—tricuspid, pulmonary, mitral (bicuspid), and aortic—are positioned within the heart to ensure blood flows in a single, forward direction and prevent backward leakage between chambers and into major vessels.",
+      "Deoxygenated blood from the body enters the right atrium, is pumped to the right ventricle, then to the lungs; oxygenated blood returns from the lungs to the left atrium, is pumped to the left ventricle, and then forcefully ejected into the aorta to circulate throughout the body."
+    ],
+    "visuals": [
+      "**Cross-section of the Human Heart:** A detailed sagittal diagram showing all four chambers, the interventricular and interatrial septa, major blood vessels (superior/inferior vena cava, pulmonary arteries, pulmonary veins, aorta), and the four heart valves. Use distinct color coding (e.g., blue for deoxygenated blood, red for oxygenated blood) to illustrate blood flow.",
+      "**Pulmonary and Systemic Circulation Diagram:** A simplified schematic illustrating the entire circulatory system, with the heart as the central pump, connecting to the lungs (pulmonary circuit) and the rest of the body (systemic circuit), using color-coded arrows to show the path of oxygenated and deoxygenated blood.",
+      "**Heart Valve Mechanism:** A small inset diagram or series of diagrams demonstrating the opening and closing of one of the heart valves (e.g., the mitral valve) during the cardiac cycle, emphasizing its role in preventing backflow."
+    ],
+    "labels": [
+      "Heart Chambers (Right Atrium, Right Ventricle, Left Atrium, Left Ventricle)",
+      "Pulmonary Circulation / Systemic Circulation",
+      "Oxygenated Blood / Deoxygenated Blood",
+      "Heart Valves (Tricuspid, Pulmonary, Mitral, Aortic)"
+    ],
+    "sources": [
+      "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGwogIgrYn1PXl11Nu8I5oqi5sBurKhoha0NNm_qdsn_Vty0nER68o0z0VNVCvC7pPPzxLIkmJ1zQuOevhqnj6HoSLBC21zjtcmmxHDsQm1_JTtOR8C6O0RFBVTG33pzy3fc1E4IzqryPD3We7k1BY0EFItgfLqv1Nm223c8S72jlJg0CRSRMeFVzOOmcZDm3bo71pvZSVWA-bzeg==",
+      "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGp7ZJ4xXrCWiGQ3Ys97WPucJEC0rKJxJJ1dCgqJadisrl1tvqZVZhDt5mNVlKPGtq99_9zpVhsCgcbpEdnXqwem-m1h6AlKbFxWXLN6SHtQXUkNrKxBC8ZaKG0yOOntUBYG2nd_rhb3NESY-t7ey_qbXU-p5bsLu8oOmhYXRPPmEJha4HwCDVFB_sG",
+      "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHMRSKoqREtdUj_RNrlXU4k0FByGFpDk45QnV9-9w3KIj2923bM5Ml_1OTVsanfdYc6cEQctRvRd6ltFs8p08YAM0jjAE-MQiS2yjTd-LLVdVqXrLCOpeYccBFgGPUrGAFtuAy6IlZTclK0FK-03SIs53bGznamW7n-kliaVQ==",
+      "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFyLgqA0qF-Rby29nSSWelCu37FayklFxZo74fnccpAtJ6XCxHrzUhpAFL5m2yuYmcmHxOcyOHLkKJrPwEI4fnGh6mp4AOFzTDCh0wqmbxQGVp_hWbqO1y2wv1IeQJ1b_D_fXBEF0T4rSqw5ylqFMJlzJ0iGi-pS3_xJw6QrZdakrEbli9WObOE5qISXd6s2iYeSvDrzgzP88jjGH0GBZ-3IkbzJMPaderdXxxtlxqmUf13deIvz3gzZHhXrNrLHSZ08gUeXY29X1iBn8u9hIs=",
+      "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEyVEoT37HC4b1Kz-ls-LGXhWAvQuOJOwzyZJwb4Ko-57YzE7AnOQUms5GD6mm5F3dsUfWQLJhOvtgSL5OBu7pBk1oWK5C9jWj_h9UbQRylMcZmhv3OxkjhPUVrD_Te1B02akUl4f48fXIHW0jWLojc60QGK7vjFmphSdZdQig3ZbU=",
+      "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEcpf7hUsdH3zkovAlttRDmgZThgptMKhq7uQJHyuUCfxnFOC1dv_Ka4DSzejL7Zq2eA5CPs28DlT1Q8wOv1UhuibV6jKLOC1QlgaX5bdd_xKdiCUOw7A3YEM3bGlq1AipT3SYPU2PFGBNxH1xjCVNvMvZJ9UUMVZAWqU0VZMbch0OxblvpiA0FQKYCAq61OlW7DhtAIhUAfQ==",
+      "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGpyAbaHYXWkxpMLCj-tQqJfWMYaHG_3h9qBe1NFgR4D7x_tOXVgDVyfTjEX1rL4WW6yxZgYRrIBuqfA01gtIZ12DqxPcWADYCLYGy9Kf56EksvgM7ZC3B-2DqfNysRQQsB7r8202Hi6JKISQ6ag0rzXA18ZF9Lr91fs8vrCa742A==",
+      "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQESWGvXEG-etW2kNIAmwcRtpGygIYRz4GRKfhyGE1Zw_KPujZeX3n05VV5fdhi9x55MwInc1fPlZNrV8wN0QzYE50knFgvSusb4EWqrR4igYUyHjBWR4WpIQfEn-2oMOLNpQQ_z_2FpKi8v-Bab9kqo5Koy_K4S4TD_tJ7FL8A5doSMkw==",
+      "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHAj9jtpJM28feTVZRvyH8WIRtt7kPuvvz1aBK-pgzc2Il3h9VvROsq-EAtXh-zQp7-LSdh8VYax4MRqiEugAiv8SlFOYAF3zu7Q4zl1ppjvDH4SeqvYMFK5K12_qO4KpFJfGqG9hzn-qPint1a6zlIgqN2jYk8SUo7i0_asW_QLA==",
+      "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHNyEEqEhSyKV95VNST5bM68CAmfIlJAejQuh6yGlnKLvB6HFs02OCPm9uIw6INjjFtoQ4icoTn4AEegG03MDwzUdqoq_qwuG_6jq6hYKOS__Lvw2f4RS_RCnfrV7BJygx3ZCUeoA==",
+      "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGC8-i2P-Jthk0jmkKlnk_dTDCIJkhkeQUgU8daMGvZCEOa4Q0zJ5CjrykeZQaszDSlb2bgOF5TAySpJrQfDvi28y-s4TGmlzIK5FzEfGXqJVDXCoUz9pX0gMyok53Gxg0HFpRKAcH8VFFw8AeVO-N7I-sz4KeG3NClMRUuPdXYrZhDRMPtR-XiS1U0x3YyfAZcFesb9io_wvr7NA==",
+      "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQE8DgrkQ9b0sDEz3zNHA6zlZytGcHsq7URsDtyhVivseKhhSsyVvs8MlV8usc19FkUXHVRq7gMJ3d6FaMeyr7-ZHR5A58NWzq5qN3HntQbAoX4LGcg8RiJkhEOZFMvZPBye-qZjgeYRamZa74Nzw0rIieJIeCd8BquN4Q==",
+      "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHGb7vvlH_H61m3HPFogE1lBM9FIRd7_zZ9BmlsERQYeYGVBCK6DG5uNEk0LY8PUPGq0yFrndfOvo9qfaZ--uv_hhOdk5e4wZyIh7KtxP2qFF2WFjtCESKW0Kbv1K_u-w8zlkXQtFFPaxcuyYAY5jGk5xUV_4PFc985FWXLwa80_zDerCKfK4eTRwxj6b9lLrfl",
+      "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGifRjpv9xJDqQGmDdRngIrMAC2TdXs1Xv1C-5qPRp2NCMFhf0yIHesczVaRTiMd-Y620XklcgVqmsxp_JGG7gbvMeDspaDNaCpM3is95Y5ey9CXVtZpNN4axfaEi8mwWUAEsMbdKSPPq-a70oahW51-eO_aiucA0KoYw==",
+      "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEcb1l0_58RpuSICts2IwmrR1QF7vYI9YhfHUVqijXfbWsVBrQ7gJpSUWgyKaR2sgmzqxzr1C1DcYgIv9160KUNhxGx9yOmnp2YYLujOnSxUc5WP6lnclghU61C6R0lFhXl_ApwXX2-XRUIKB7ws-KuikF6ZsZaXg_M1kDDxPu5gFqWjajinPClF2OIa6mBAnWwvFI=",
+      "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFJuoTEotvONXOTEGMKXZZjTVBi_GGQPkc_U0Lx901-YITfD6sHO_uUAkxNQQgIMlGUr3wJG61wnWexocRNS-M--SxMqUOnZy-9settIPEfgrMewEANq9n5ysAadd3wKOVZSLrmZ150XEn57w==",
+      "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEIpyqEFgq4Shk2C5Lpvp209gFMVpGrTi3DzDvHmv1H_0FjEvyhU4gVP2ogEHRsldvjOUfkbyjUlQ8XdKArPsh4OE42ukDj2G0v3Bh4J6QGohcBF9wszaZ9kr8pTuqxf2pufelanQs4HSxscmSm3mX38WB-B37uHXbOK0PUROeQ1F7xNL2kDo1cc7IaaQ9owgNph_LaHLaXZv8xTRAGIWCAaiUtSmqQxaxGMp7cZIxC2sCN3USKOtPglIlUwdhITYTMVRTpHdP5E7hTTkCj-u6adxYtZ41kN3wU5uYOFA0atLcjgtNBDr1_2gs9oGZjEc_Y_kVxJorHoDk9U-xq6G0NwC6T6ACLtmZu1QPApZQNvpcazKWZ8w==",
+      "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQH8jvon1VHGoQI5HmboYycA1k9GLlw1WujkISIVO47nkbeGhBJtceKPvzj3upxuVJ25L79qJyZk9zT3O_aMRfrwD25OKEfCrUD_CKcOAKrPJPuNFtXlsxKHgeSux0bLcCuxs1tTA5tlwJgt4zM-OuuOqRs9DnFzJ2TaGvRaz_5WBxqalD7kszb70eTb4qX70M5P5NqWj6EnS9h1Q3UNEzM71kTpYgfBaA==",
+      "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFSih2n_wVTX86iRAr0MjfyD9V3JkJqFQJxofU2PTkq5QOZsFW4T0-VQRFEU_c2zTE1wM_6BcVtfRg0-hXHjE7N-op-ZL7wCT-eK-w8Ov_1MHv5oykrdTdEf5ic3thN0djvjHb2XbJb1BHrZqw=",
+      "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQF94tSXL0WBheDaIpaFFrhzmtVynNElGu6iC57Le6F2jPcq-1wpazZmbih_0WYIL2iKcO0GP4oQrcAYfFPHXoNPy0b6MK7D9Nx3iJ95hSkOpoWc5mLPkMRgi0a9IMC8YIaaCIQpybURyt0o6MnItenb75enflDovUo=",
+      "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFMzchmHV55qu1SwSlLt-U1D8gBeTlyEPO5Tu3gcQJ1Z1AmXga5E0y88RuO1VAtLsikXxduJoohNg7kIpf4ILc0UUuwApJ7mEI-sgitTJdvINc5nmaOkm9o4fEV29JIp4XUh6ZVhmkrEIOXKswCQGZ0vhyP6C94IVx29VkQ0E_uz3XR_3V9E1p94pPzx2JWE13C2oIYrRoqwd8KSa6JnmtU9w==",
+      "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFgdCXdZ9RbaGx_CylqUAxsAnVywaa_ooPnYJ2ksAl0nP14i4czoTlVS_urS1aXSfYM09EyBBN2cohiTZzdDiRLQgBmkt3kc9BfGJ0iHST_1dwZmRBzWh51OBuFx0YbEzK20qLO3LE=",
+      "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFr8t2URhaZWz9vAY-fxjim__c5LpjYzU4HnCLr5hdYLC9x8uXRmyBlE-UX96n5XbumocLzCmBJ6RJ5sea7YIfcSW_SlMl-znlIQRVsLm2TCwqeRIDTrv25r_0vqfxHsWdAU2H8tZNyBZd_w7Y=",
+      "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQH6Fbx0FHfIPOt0LAm9nR5AUpEpucggvBaOci_2BpuBesFsL5afJCHXuABV9kV0B8CJPiTKQ5bpjIoM2aFCBG6284tsh-WuIS3PI62-U0Y6oCaSJel3XBaBi-PlQJa1YXSAAWatzENGTsXUO87HmF00gjCh5Zow-QWdtVyzlFwNmb3cCUftRa2YGDLRhFyYGGgREv4FbBCfti0aeKDN0gbgscA7ZwjOpxmLOgRd2enTW_rfra0G2_CZVjrLVuIe_h-wS_o=",
+      "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFH_0CREyJf6QFSim7LMberhz4cTk7Isk-EoZsZEesLnAYeluuFuXNtbHBoylUKDepXh-OMcId_gFDsnI7awSIOmtaao8s9qQHYhsVLeG8TOE-KO8SnZkG8dZDmQ0rYvOI09t0Zet0HziOJsW7g-UZnQirBX1vVVNjDmbcy5cGMwjzFbaL2xP1BJXEymiGtEDvZtqps-SeG_IiE"
+    ]
+  },
+  "promptLength": 3434,
+  "imageSize": 796422,
+  "timestamp": "2026-02-05T01:24:36.753Z"
+}

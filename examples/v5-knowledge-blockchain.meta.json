@@ -1,0 +1,41 @@
+{
+  "topic": "How blockchain technology and distributed ledgers work",
+  "style": "minimalist",
+  "audience": "college",
+  "research": {
+    "facts": [
+      "It was estimated by the World Economic Forum that by 2025, 10% of the world's Gross Domestic Product (GDP) would be stored on blockchain-related technology, underscoring its profound global economic integration.",
+      "Blockchain achieves immutability primarily through cryptographic hashing, utilizing algorithms such as SHA-256, which generate a unique 256-bit digital fingerprint for each block of data, offering approximately 1.1 x 10^77 possible outputs, thereby rendering collisions computationally infeasible and preventing data alteration.",
+      "Distributed Ledger Technology (DLT) operates on a peer-to-peer network where each participating node maintains an identical copy of the ledger; for example, the Bitcoin network currently hosts 24,519 reachable nodes globally, collectively validating transactions via consensus mechanisms to ensure decentralization and data integrity.",
+      "Each block in a blockchain is a secure container of transactional information, intrinsically linked to its predecessor by a cryptographic hash, including a timestamp and transaction data often organized into a Merkle tree; typical Bitcoin blocks in 2025 ranged between 1.6 and 1.9 MB, reflecting optimized data aggregation.",
+      "The blockchain technology market was valued at USD 24.46 billion in 2025 and is projected to expand to USD 39.82 billion in 2026, driven by surging enterprise adoption for its capabilities in enhancing security, transparency, and operational efficiency across diverse sectors beyond just cryptocurrencies."
+    ],
+    "visuals": [
+      "**Blockchain Structure Diagram:** A detailed schematic illustrating interconnected blocks, each displaying its header (comprising previous block hash, timestamp, nonce, and Merkle root) and a Merkle tree representing bundled transaction data.",
+      "**Distributed Network Topology:** A graphical representation of a peer-to-peer network, showing multiple interconnected nodes, each holding a replicated copy of the distributed ledger, and arrows indicating the flow of transaction broadcast and consensus communication.",
+      "**Transaction Lifecycle Flowchart:** A step-by-step diagram detailing the process from transaction initiation, its broadcast to the network, validation by nodes, inclusion in a new block, and the final addition of the block to the chain after achieving consensus."
+    ],
+    "labels": [
+      "Blockchain",
+      "Distributed Ledger Technology (DLT)",
+      "Cryptographic Hash",
+      "Consensus Mechanism"
+    ],
+    "sources": [
+      "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHuUHqIcpwhxhHHMPWwU08F51OruRwQvUArazIMGuUxi3XnAIjXaysxmdA1DCiONC96KvnE-G4AFtuBvQwf35Osr9brxvlaWuYevSOxr6gqxO35292qXumg_oypErfsKXh9Og==",
+      "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEE5xo_UVsHDz4_3Fu3W9Hq3aEMaeOea-kYoRJUTHAYVCYC9apkK0zH1CtuHkoGjbKvo0XCsQ3ose29eWhgHeoH_cvNuyT74wTEQnYe_eGZDC5ah_6U05FIaWenxmAoSph8QdxUUnt3i6kij2DUSdBe5SoXFPwLKpij-iErnS1C2UVLPJzEkvyF-3Q=",
+      "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFmU2MUyIVZtMjAnjXQ5Nyf58jWgtz89b1yA_3WpPhNpDZn-NwF3GBsNQrcreve4-aNjYOFk24po8ievRlnAAKlR_0Tb7ZLaJAqENJWw06yoAdbht-d0DPH9yHfkijnbT1CyVlCQ45h2h9KYRbS1UDTqkkdZ5wopMYgb2g=",
+      "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEClo-4lBbY2nYyc9dcHSnO-ihxtwTHJ_e-6sxNVRtMU4qQpVVY1n8nGZLCOqk6ibVbLDY6NDWBFjinK2cD3g4X5KXx9l_by-JyDZEZZHUKdX226EotDf8Ub0aqEuOV7wCnyZ-tfa3hd9Pc5X3GxRWP5D4Rr7fd_foqAizV285N1uhCKsE2CaYcqpmJ3YHtxBhMG4jXNQOpFu-Ha8s-8YHLOQ==",
+      "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQG1kk34JCJrwjIyJKNLwjMMhU2TB1Ujaw5n972P6qsPQ5vgfXOALHDyn4eyN0PZt4BpGP7QKFTmreZKggqAeE3gzfD2r1uCurw3vQkSJidAbaK4O4S5kw0cQZV6e0weXZ3RpOCHRclh6D0ZbSZXH5n9Di5Wcl48zpkaGmMOSNlB5Gg8_PN_932C",
+      "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEDRwQraG4G4F-Aod5TMcuXPT-nmSXeGiaK-2dysvfOvvmrkLSdkUptttSgDhm351KWXtkTGthp8lX8qNnby7AlpQ4yfqqJdfCusZvC6FUeGsHM1aIHihoi9TfkzTorwRhjzgVNHr15ZoVc",
+      "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEKqkr0SUwPRP6p67ay2evZp4AzeHM4doL_idU5TJPlyOf19iwXRqaj7QJwP8tsZgNyt1Tt8S4vVW_Z0mCWzPtuAvdZ8rMFzfputT2uDlP2qPhSlkb9BhJNuBcvNOiMkJ6s",
+      "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFNM1MiJttKCmvSi6RFgGsTPY_HIWNx4oCfu35cQbYyHkSNDnf0ThocD_bLHrOR2bcVPh9NTYyiUvHuSUbSKa0HORRknRld29-tE8IxCPGq6HGFswjiWUyfqu5ZtZOXp9abAnPqMXNAH8GKroY5uU1tA78QWlac7biNvxFC6Bs=",
+      "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGLLYL5f-UYT3yf8sA9D4moVZs5L3ombNNckrN4Y_iclRV7-YOYL58q2JuAiMZNcQM6rWBuybm4unM7i2EPdZqVUoyvHV6QB04nPMARIWGePT1BGtVWioDwyGyWpWLz2kFK9yBKIXl34NfHUyOYhdsZYKbVp9qB5xf7sDlc5-oDWhOEGbI=",
+      "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFlhDqS01mMlAQiMcWVV0jY2ufAQT0R4k4tPXTr4aTzRdYwY1ijbT8WDkcppQuAZ83FQ7Lqv-h6cc_QI7YEjw_EqMpsliB5qB9BuCzWhLN6dq86IZhGGW5FGy8RaHxHVbYiMOeksw==",
+      "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGPboqJ2A-GbTFtpUQ9a5gKR-1HsiZNZbPXnIvrpIulJJg81zgpQgQKz2iOZ-sDaVG_JIrY-s78u7jCxx8LvpkEYHVQrdTu1gMRS1FY1IMR2b-pJKh_IUSU1K6eEHj7_yWeInrvRe3RKxx2NSrBniOJvxy4JSKYdUxFm53P-vKi2bFWOt9_D6uqyqA="
+    ]
+  },
+  "promptLength": 3427,
+  "imageSize": 837445,
+  "timestamp": "2026-02-05T01:26:47.325Z"
+}

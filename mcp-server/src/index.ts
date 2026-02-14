@@ -94,6 +94,14 @@ const STYLES: Record<string, {
   'cartoon': {
     name: 'Educational Comic',
     instruction: 'Educational Comic. Vibrant colors, thick outlines, expressive cel-shaded style, engaging and fun. Information made approachable through visual storytelling.'
+  },
+  'glassmorphic': {
+    name: 'Premium 3D Glassmorphism',
+    instruction: 'Premium 3D Glassmorphic Infographic. Dark void background (#0b0e14). All information displayed on frosted translucent glass panels floating at different depths. Key concepts rendered as 3D crystal/glass nodes connected by thin luminous teal (#7fffd4) threads. Dramatic directional spotlight from upper-left creating teal rim lighting on all glass surfaces. Gold (#ffd700) accents on highlights. Clean white sans-serif labels on every element. Maximum 3 accent colors. Professional data visualization meets luxury 3D rendering. NOT flat, NOT HUD overlay, NOT cyberpunk, NOT clay. Ultra-high detail, studio quality.'
+  },
+  'premium': {
+    name: 'Luxury Brand Visual',
+    instruction: 'Luxury tech-brand visual. Apple meets Dior meets DeepMind. Dark void background (#0b0e14). One striking crystal/glass focal element at center with dramatic volumetric lighting. Data and labels on frosted glass cards orbiting the focal point. Thin luminous teal (#7fffd4) connection threads forming constellation pattern. Gold (#ffd700) warm accent highlights. Ultra-clean typography in thin modern serif. 50%+ negative space. Materials: crystal, glass, titanium, light. NEVER clay, plastic, HUD, or clutter. 8K detail.'
   }
 };
 
@@ -283,7 +291,7 @@ if (!process.env.GEMINI_API_KEY) {
 const genAI = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
 const server = new Server(
-  { name: 'arcanea-infogenius', version: '5.0.0' },
+  { name: 'arcanea-infogenius', version: '5.1.0' },
   { capabilities: { tools: {} } }
 );
 
@@ -296,7 +304,7 @@ const GenerateInfographicSchema = z.object({
     .min(3, 'Topic must be at least 3 characters')
     .max(500, 'Topic must not exceed 500 characters')
     .describe('What to research and visualize — a topic, concept, or question'),
-  style: z.enum(['standard', 'minimalist', 'photorealistic', '3d', 'technical', 'futuristic', 'vintage', 'cartoon'])
+  style: z.enum(['standard', 'minimalist', 'photorealistic', '3d', 'technical', 'futuristic', 'vintage', 'cartoon', 'glassmorphic', 'premium'])
     .default('standard')
     .describe('Visual presentation style'),
   audience: z.enum(['elementary', 'highschool', 'college', 'expert'])
@@ -382,7 +390,7 @@ const GenerateVisualSchema = z.object({
     .min(10, 'Description must be at least 10 characters')
     .max(2000, 'Description must not exceed 2000 characters')
     .describe('Direct visual description — use generate_infographic for knowledge-based visuals'),
-  style: z.enum(['standard', 'minimalist', 'photorealistic', '3d', 'technical', 'futuristic', 'vintage', 'cartoon'])
+  style: z.enum(['standard', 'minimalist', 'photorealistic', '3d', 'technical', 'futuristic', 'vintage', 'cartoon', 'glassmorphic', 'premium'])
     .default('standard')
     .describe('Visual style preset'),
   label: z.string().optional()
@@ -584,7 +592,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
 async function main() {
   const transport = new StdioServerTransport();
   await server.connect(transport);
-  console.error('InfoGenius v5.0 — Knowledge-First Visual Intelligence');
+  console.error('InfoGenius v5.1 — Knowledge-First Visual Intelligence + Premium Glassmorphism');
 }
 
 main().catch((error) => {

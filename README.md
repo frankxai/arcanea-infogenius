@@ -131,7 +131,7 @@ Different visual styles for different needs:
 
 <div align="center">
 
-| FrankX Superintelligent System | Arcanea Intelligence OS |
+| FrankX Superintelligent System | Arcanea Ecosystem |
 |:---:|:---:|
 | ![FrankX System v3](examples/v3-frankx-system.png) | ![Arcanea Ecosystem v3](examples/v3-arcanea-ecosystem.png) |
 | *Imagen 4 Ultra • 8K Hyper-Detailed* | *Imagen 4 Ultra • Isometric* |
@@ -315,8 +315,9 @@ We value practical over clever.
 
 ## Related Projects
 
-- [Agentic Creator OS](https://github.com/frankxai/agentic-creator-os) - Full creative operating system
-- [Arcanea Intelligence OS](https://github.com/frankxai/arcanea-intelligence-os) - Agent orchestration with mythology
+- [Arcanea](https://github.com/frankxai/arcanea) - Core monorepo &mdash; agents, skills, Library, web application
+- [Starlight Intelligence System](https://github.com/frankxai/Starlight-Intelligence-System) - Persistent context and memory layer for AI agents
+- [Agentic Creator OS](https://github.com/frankxai/agentic-creator-os) - Claude Code-native operating system for creators
 
 ---
 

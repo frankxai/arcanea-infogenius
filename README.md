@@ -1,20 +1,28 @@
-# InfoGenius
-
 <div align="center">
 
-**AI visual generation that doesn't suck.**
+<img src="./assets/hero-banner.png" alt="InfoGenius" width="100%"/>
 
-Generate technical diagrams, architecture visuals, and content graphics with **Gemini 3 Pro** - Google's most capable image model.
+<br/><br/>
 
-```
-prompt → intelligence layer → gemini 3 pro → visual
-```
+# InfoGenius
 
-[![MIT](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)]()
-[![Gemini 3 Pro](https://img.shields.io/badge/Gemini_3-Pro-4285F4.svg?style=flat-square)]()
-[![MCP](https://img.shields.io/badge/MCP-ready-green.svg?style=flat-square)]()
+### Knowledge-first visual intelligence.
+
+<br/>
+
+[![MIT](https://img.shields.io/badge/MIT-0d1117?style=for-the-badge)](https://opensource.org/licenses/MIT)
+[![Gemini 3 Pro](https://img.shields.io/badge/Gemini_3_Pro-0d1117?style=for-the-badge&color=7fffd4)](https://ai.google.dev/)
+[![MCP](https://img.shields.io/badge/MCP_Server-0d1117?style=for-the-badge&color=ffd700)](https://modelcontextprotocol.io/)
+[![v5.1](https://img.shields.io/badge/v5.1-0d1117?style=for-the-badge&color=9966ff)]()
+[![Arcanea](https://img.shields.io/badge/Arcanea-ecosystem-0d1117?style=for-the-badge&color=ffd700)](https://github.com/frankxai/arcanea)
 
 </div>
+
+<br/>
+
+Research first. Then visualize. An MCP server that generates information-rich infographics by grounding in real knowledge via Google Search before rendering through Gemini 3 Pro.
+
+Part of the [Arcanea](https://github.com/frankxai/arcanea) ecosystem.
 
 ---
 

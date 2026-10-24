@@ -9,20 +9,102 @@ import {
 import { GoogleGenAI } from '@google/genai';
 import { z } from 'zod';
 import dotenv from 'dotenv';
+import { existsSync, readFileSync, writeFileSync, mkdirSync } from 'node:fs';
+import { resolve, dirname } from 'node:path';
+import { homedir } from 'node:os';
+import { execFileSync } from 'node:child_process';
 
 dotenv.config();
 
 // ============================================================================
-// INFOGENIUS v5 — KNOWLEDGE-FIRST VISUAL INTELLIGENCE
+// INFOGENIUS v5.2 — KNOWLEDGE-FIRST VISUAL INTELLIGENCE + VEO 3.1 + GEMINI TTS
 //
-// The fundamental shift: Research FIRST, then visualize knowledge.
-//
-// Pipeline: TOPIC → RESEARCH (web grounding) → EXTRACT FACTS → COMPOSE
-//           KNOWLEDGE-RICH PROMPT → GENERATE INFOGRAPHIC
-//
-// Every image must TEACH something. Style is the presentation layer,
-// not the substance.
+// Unified pipeline:
+//   TOPIC → RESEARCH (Google Search grounding) → EXTRACT FACTS & VIDEO PROMPT
+//   → COMPOSE KNOWLEDGE-RICH PROMPT → GENERATE 2K/4K INFOGRAPHIC
+//   → OPTIONAL VEO 3.1 MOTION (.mp4) & GEMINI TTS NARRATION (.wav)
 // ============================================================================
+
+const ENV_KEY_NAMES = ['GEMINI_API_KEY', 'GOOGLE_GENERATIVE_AI_API_KEY', 'GOOGLE_API_KEY'];
+
+const ENV_FILE_CANDIDATES = [
+  resolve(process.cwd(), '.env.local'),
+  resolve(process.cwd(), '.env'),
+  resolve(homedir(), '.starlight', '.env'),
+  resolve('C:/Users/frank/.starlight/.env'),
+  resolve('C:/Users/frank/starlight/.env'),
+  resolve('C:/Users/frank/starlight/repos/frankx.ai-vercel-website/.env.local'),
+  resolve('C:/Users/frank/starlight/repos/FrankX/.env.local'),
+  resolve('C:/Users/frank/starlight/repos/infogenius/.env.local'),
+  resolve('C:/Users/frank/starlight/repos/arcanea-infogenius/.env'),
+];
+
+const INFISICAL_PROJECT_ID =
+  process.env.STARLIGHT_INFISICAL_PROJECT_ID || '6e39a7d9-be07-4f58-babb-0cf650321feb';
+const INFISICAL_ENV = process.env.STARLIGHT_INFISICAL_ENV || 'dev';
+
+function isValidKeyCandidate(v: string | undefined | null): v is string {
+  return Boolean(
+    v &&
+      !v.startsWith('<') &&
+      !v.startsWith('your-') &&
+      !v.startsWith('AQ.Ab8')
+  );
+}
+
+function resolveApiKey(): string {
+  for (const name of ENV_KEY_NAMES) {
+    const v = process.env[name];
+    if (isValidKeyCandidate(v)) return v;
+  }
+  for (const file of ENV_FILE_CANDIDATES) {
+    if (!existsSync(file)) continue;
+    try {
+      const content = readFileSync(file, 'utf8');
+      for (const name of ENV_KEY_NAMES) {
+        const re = new RegExp(`^\\s*${name}\\s*=\\s*(.+)$`, 'm');
+        const m = content.match(re);
+        if (m) {
+          const val = m[1].trim().replace(/^["']|["']$/g, '');
+          if (isValidKeyCandidate(val)) return val;
+        }
+      }
+    } catch {
+      // ignore unreadable file
+    }
+  }
+  for (const name of ENV_KEY_NAMES) {
+    try {
+      const out = execFileSync(
+        'infisical',
+        [
+          'secrets',
+          'get',
+          name,
+          '--plain',
+          '--silent',
+          `--projectId=${INFISICAL_PROJECT_ID}`,
+          `--env=${INFISICAL_ENV}`,
+        ],
+        { encoding: 'utf8', timeout: 4500, stdio: ['ignore', 'pipe', 'ignore'] }
+      ).trim();
+      if (isValidKeyCandidate(out)) return out;
+    } catch {
+      // ignore infisical lookup error
+    }
+  }
+  return '';
+}
+
+function getGenAI(): GoogleGenAI {
+  const key = resolveApiKey();
+  if (!key) {
+    throw new Error(
+      'GEMINI_API_KEY not found. Set GEMINI_API_KEY in C:/Users/frank/.starlight/.env or environment.'
+    );
+  }
+  return new GoogleGenAI({ apiKey: key });
+}
 
 // ============================================================================
 // AUDIENCE LEVELS — Controls information density and complexity
@@ -85,7 +167,7 @@ const STYLES: Record<string, {
   },
   'futuristic': {
     name: 'Cyberpunk HUD',
-    instruction: 'Cyberpunk HUD. Glowing neon blue/cyan lines on dark background, holographic data visualization, 3D wireframes. Data panels and readouts integrated into design.'
+    instruction: 'Restrained Tech HUD. Glowing neon blue/cyan lines on dark background, holographic data visualization, 3D wireframes. Data panels and readouts integrated into design.'
   },
   'vintage': {
     name: 'Scientific Lithograph',
@@ -112,25 +194,29 @@ const STYLES: Record<string, {
 async function researchTopic(
   genAI: GoogleGenAI,
   topic: string,
-  audience: string
+  audience: string,
+  styleName = 'glassmorphic'
 ): Promise<{
   facts: string[];
   visualElements: string[];
   labels: string[];
   context: string;
+  videoPrompt: string;
   sources: string[];
 }> {
   const audienceLevel = AUDIENCES[audience] || AUDIENCES['college'];
+  const styleObj = STYLES[styleName] || STYLES['glassmorphic'];
 
-  const researchPrompt = `You are a visual knowledge architect. Research this topic thoroughly and extract the essential knowledge needed to create an educational infographic.
+  const researchPrompt = `You are a Master Visual Knowledge Architect. Research this topic thoroughly using Google Search and extract the essential knowledge needed to create an educational infographic and a 7-second companion motion clip.
 
 TOPIC: "${topic}"
 AUDIENCE: ${audienceLevel.label} (${audienceLevel.density} information density)
+AESTHETIC: ${styleObj.name} (${styleObj.instruction})
 
 Respond in EXACTLY this structured format:
 
 FACTS:
-1. [Most important fact - include specific numbers/data when available]
+1. [Most important verified fact - include specific numbers/2026 data when available]
 2. [Second key fact]
 3. [Third key fact]
 4. [Fourth key fact if density is high/maximum]
@@ -151,7 +237,8 @@ LABELS:
 CONTEXT:
 [One paragraph explaining WHY this topic matters and what the viewer should understand after seeing this infographic]
 
-Be precise. Use current 2026 data. Every fact should be visualizable.`;
+VIDEO_PROMPT:
+[Cinematic prompt for a 7-second motion sequence animating the core mechanism of this infographic in ${styleObj.name} style]`;
 
   const researchModel = process.env.INFOGENIUS_RESEARCH_MODEL || 'gemini-2.5-flash';
 
@@ -166,14 +253,16 @@ Be precise. Use current 2026 data. Every fact should be visualizable.`;
 
     const text = response.text || '';
 
-    // Parse structured response
     const facts = extractSection(text, 'FACTS');
     const visualElements = extractSection(text, 'VISUAL_ELEMENTS');
     const labels = extractSection(text, 'LABELS');
-    const contextMatch = text.match(/CONTEXT:\s*\n([\s\S]*?)(?:\n\n|$)/);
+    const contextMatch = text.match(/CONTEXT:\s*\n([\s\S]*?)(?=\n[A-Z_]+:|$)/i);
     const context = contextMatch ? contextMatch[1].trim() : topic;
+    const videoMatch = text.match(/VIDEO_PROMPT:\s*\n?([\s\S]*?)$/i);
+    const videoPrompt = videoMatch
+      ? videoMatch[1].trim()
+      : `Cinematic 7-second data visualization animation of ${topic}. ${styleObj.instruction}`;
 
-    // Extract sources from grounding metadata if available
     const sources: string[] = [];
     const candidates = response.candidates;
     if (candidates?.[0]?.groundingMetadata?.groundingChunks) {
@@ -189,16 +278,17 @@ Be precise. Use current 2026 data. Every fact should be visualizable.`;
       visualElements: visualElements.length > 0 ? visualElements : [`Diagram of ${topic}`],
       labels: labels.length > 0 ? labels : [topic],
       context,
-      sources
+      videoPrompt,
+      sources: Array.from(new Set(sources))
     };
   } catch (error) {
-    // Fallback: generate without grounding if search fails
     console.error('Research grounding failed, using fallback:', error);
     return {
       facts: [`Key aspects of ${topic}`, `How ${topic} works`, `Why ${topic} matters`],
       visualElements: [`Diagram showing ${topic}`, `Components of ${topic}`],
       labels: [topic],
       context: `An educational overview of ${topic}`,
+      videoPrompt: `Cinematic 7-second data visualization animation of ${topic}. ${styleObj.instruction}`,
       sources: []
     };
   }
@@ -211,19 +301,12 @@ function extractSection(text: string, sectionName: string): string[] {
 
   return match[1]
     .split('\n')
-    .map(line => line.replace(/^\d+\.\s*/, '').replace(/^\[|\]$/g, '').trim())
+    .map(line => line.replace(/^(?:\d+\.|-|\*)\s*/, '').replace(/^\[|\]$/g, '').trim())
     .filter(line => line.length > 0 && !line.startsWith('['));
 }
 
 // ============================================================================
 // PROMPT COMPOSER v5 — Knowledge-First (Facts → Visual Directives)
-//
-// The prompt structure:
-// 1. What kind of infographic (style + audience)
-// 2. The RESEARCHED FACTS to visualize (the substance)
-// 3. Visual elements derived from knowledge (not decoration)
-// 4. Labels and annotations (precision)
-// 5. Composition and quality
 // ============================================================================
 
 function composeInfographicPrompt(
@@ -238,20 +321,12 @@ function composeInfographicPrompt(
   audience: string,
   aspectRatio: string
 ): string {
-  const style = STYLES[styleName] || STYLES['standard'];
+  const style = STYLES[styleName] || STYLES['glassmorphic'];
   const audienceConfig = AUDIENCES[audience] || AUDIENCES['college'];
 
-  const factsBlock = research.facts
-    .map((f, i) => `- ${f}`)
-    .join('\n');
-
-  const visualBlock = research.visualElements
-    .map((v, i) => `- ${v}`)
-    .join('\n');
-
-  const labelsBlock = research.labels
-    .map(l => `"${l}"`)
-    .join(', ');
+  const factsBlock = research.facts.map((f) => `- ${f}`).join('\n');
+  const visualBlock = research.visualElements.map((v) => `- ${v}`).join('\n');
+  const labelsBlock = research.labels.map(l => `"${l}"`).join(', ');
 
   return `Create a ${aspectRatio} educational infographic about: ${topic}
 
@@ -280,23 +355,46 @@ QUALITY: Render at maximum quality. Sharp detail, no artifacts. Every label must
 }
 
 // ============================================================================
+// AUDIO WAV WRAPPER FOR GEMINI TTS
+// ============================================================================
+
+function wrapPcmInWavHeader(pcmBuffer: Buffer, sampleRate = 24000, numChannels = 1, bitsPerSample = 16): Buffer {
+  if (pcmBuffer.length >= 4 && pcmBuffer.toString('ascii', 0, 4) === 'RIFF') {
+    return pcmBuffer;
+  }
+  const byteRate = (sampleRate * numChannels * bitsPerSample) / 8;
+  const blockAlign = (numChannels * bitsPerSample) / 8;
+  const dataSize = pcmBuffer.length;
+  const header = Buffer.alloc(44);
+
+  header.write('RIFF', 0);
+  header.writeUInt32LE(36 + dataSize, 4);
+  header.write('WAVE', 8);
+  header.write('fmt ', 12);
+  header.writeUInt32LE(16, 16);
+  header.writeUInt16LE(1, 20);
+  header.writeUInt16LE(numChannels, 22);
+  header.writeUInt32LE(sampleRate, 24);
+  header.writeUInt32LE(byteRate, 28);
+  header.writeUInt16LE(blockAlign, 32);
+  header.writeUInt16LE(bitsPerSample, 34);
+  header.write('data', 36);
+  header.writeUInt32LE(dataSize, 40);
+
+  return Buffer.concat([header, pcmBuffer]);
+}
+
+// ============================================================================
 // MCP SERVER SETUP
 // ============================================================================
 
-if (!process.env.GEMINI_API_KEY) {
-  console.error('ERROR: GEMINI_API_KEY environment variable is required');
-  process.exit(1);
-}
-
-const genAI = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
-
 const server = new Server(
-  { name: 'arcanea-infogenius', version: '5.1.0' },
+  { name: 'arcanea-infogenius', version: '5.2.0' },
   { capabilities: { tools: {} } }
 );
 
 // ============================================================================
-// TOOL: generate_infographic — Knowledge-first visual generation
+// TOOL SCHEMAS & HANDLERS
 // ============================================================================
 
 const GenerateInfographicSchema = z.object({
@@ -305,7 +403,7 @@ const GenerateInfographicSchema = z.object({
     .max(500, 'Topic must not exceed 500 characters')
     .describe('What to research and visualize — a topic, concept, or question'),
   style: z.enum(['standard', 'minimalist', 'photorealistic', '3d', 'technical', 'futuristic', 'vintage', 'cartoon', 'glassmorphic', 'premium'])
-    .default('standard')
+    .default('glassmorphic')
     .describe('Visual presentation style'),
   audience: z.enum(['elementary', 'highschool', 'college', 'expert'])
     .default('college')
@@ -313,16 +411,22 @@ const GenerateInfographicSchema = z.object({
   aspect_ratio: z.enum(['16:9', '1:1', '9:16'])
     .default('16:9')
     .describe('Output aspect ratio'),
+  image_size: z.enum(['1K', '2K', '4K'])
+    .default('2K')
+    .describe('Resolution tier (1K, 2K, or 4K)'),
   label: z.string().optional()
-    .describe('Optional title text to render prominently on the infographic')
+    .describe('Optional title text to render prominently on the infographic'),
+  output_path: z.string().optional()
+    .describe('Optional file path to save the generated PNG and .vis.provenance.json sidecar')
 });
 
 async function generateInfographic(args: z.infer<typeof GenerateInfographicSchema>) {
-  const { topic, style, audience, aspect_ratio, label } = args;
+  const genAI = getGenAI();
+  const { topic, style, audience, aspect_ratio, image_size, label, output_path } = args;
   const sanitized = topic.replace(/[<>]/g, '').trim();
 
   // STEP 1: Research the topic with web grounding
-  const research = await researchTopic(genAI, sanitized, audience);
+  const research = await researchTopic(genAI, sanitized, audience, style);
 
   // STEP 2: Compose knowledge-rich prompt
   let prompt = composeInfographicPrompt(
@@ -333,7 +437,6 @@ async function generateInfographic(args: z.infer<typeof GenerateInfographicSchem
     aspect_ratio
   );
 
-  // Add title if requested
   if (label) {
     prompt += `\n\nTITLE: Render "${label}" as a prominent title at the top of the infographic in a clean, modern font.`;
   }
@@ -344,23 +447,58 @@ async function generateInfographic(args: z.infer<typeof GenerateInfographicSchem
   const response = await genAI.models.generateContent({
     model: imageModel,
     contents: prompt,
-    config: { responseModalities: ['image', 'text'] }
+    config: {
+      responseModalities: ['IMAGE', 'TEXT'],
+      imageConfig: {
+        aspectRatio: aspect_ratio,
+        imageSize: image_size
+      }
+    }
   });
 
   const parts = response.candidates?.[0]?.content?.parts;
   if (!parts) throw new Error('No response from model');
 
   for (const part of parts) {
-    if ('inlineData' in part && part.inlineData) {
+    if ('inlineData' in part && part.inlineData?.data) {
+      let savedPath: string | undefined;
+      if (output_path) {
+        savedPath = resolve(output_path);
+        const dir = dirname(savedPath);
+        if (!existsSync(dir)) mkdirSync(dir, { recursive: true });
+        writeFileSync(savedPath, Buffer.from(part.inlineData.data, 'base64'));
+        writeFileSync(
+          `${savedPath}.vis.provenance.json`,
+          JSON.stringify(
+            {
+              schemaVersion: '5.2.0',
+              generator: 'arcanea-infogenius-mcp',
+              createdAt: new Date().toISOString(),
+              topic: sanitized,
+              style,
+              audience,
+              aspectRatio: aspect_ratio,
+              imageSize: image_size,
+              research,
+              prompt,
+            },
+            null,
+            2
+          )
+        );
+      }
+
       return {
         success: true,
-        image: part.inlineData.data,
+        savedPath,
+        image: output_path ? undefined : part.inlineData.data,
         mimeType: part.inlineData.mimeType || 'image/png',
         research: {
           facts: research.facts,
           visualElements: research.visualElements,
           labels: research.labels,
           context: research.context,
+          videoPrompt: research.videoPrompt,
           sources: research.sources
         },
         metadata: {
@@ -369,6 +507,7 @@ async function generateInfographic(args: z.infer<typeof GenerateInfographicSchem
           style,
           audience,
           aspectRatio: aspect_ratio,
+          imageSize: image_size,
           promptLength: prompt.length,
           timestamp: new Date().toISOString()
         },
@@ -380,10 +519,111 @@ async function generateInfographic(args: z.infer<typeof GenerateInfographicSchem
   throw new Error('No image data in response');
 }
 
-// ============================================================================
-// TOOL: generate_visual — Direct visual generation (no research, art-only)
-// Kept for backward compatibility and pure art generation use cases
-// ============================================================================
+const AnimateInfographicSchema = z.object({
+  prompt: z.string()
+    .min(10)
+    .max(2000)
+    .describe('Motion prompt (use videoPrompt from research_topic or generate_infographic)'),
+  aspect_ratio: z.enum(['16:9', '9:16'])
+    .default('16:9')
+    .describe('Video aspect ratio (16:9 or 9:16)'),
+  output_path: z.string()
+    .describe('Absolute file path where the .mp4 video should be saved')
+});
+
+async function animateInfographic(args: z.infer<typeof AnimateInfographicSchema>) {
+  const apiKey = resolveApiKey();
+  if (!apiKey) throw new Error('GEMINI_API_KEY not found');
+  const genAI = new GoogleGenAI({ apiKey });
+  const veoModel = process.env.INFOGENIUS_VEO_MODEL || 'veo-3.1-fast-generate-preview';
+
+  let operation = await genAI.models.generateVideos({
+    model: veoModel,
+    prompt: args.prompt,
+    config: {
+      numberOfVideos: 1,
+      resolution: '720p',
+      aspectRatio: args.aspect_ratio
+    }
+  });
+
+  let polls = 0;
+  while (!operation.done && polls < 45) {
+    polls += 1;
+    await new Promise(r => setTimeout(r, 8000));
+    operation = await genAI.operations.getVideosOperation({ operation });
+  }
+
+  const downloadUri = operation.response?.generatedVideos?.[0]?.video?.uri;
+  if (!downloadUri) {
+    throw new Error('Veo video generation completed without a download URI');
+  }
+
+  const sep = downloadUri.includes('?') ? '&' : '?';
+  const res = await fetch(`${downloadUri}${sep}key=${apiKey}`);
+  if (!res.ok) {
+    throw new Error(`Failed to download Veo video: ${res.status}`);
+  }
+  const buf = Buffer.from(await res.arrayBuffer());
+  const outPath = resolve(args.output_path);
+  const dir = dirname(outPath);
+  if (!existsSync(dir)) mkdirSync(dir, { recursive: true });
+  writeFileSync(outPath, buf);
+
+  return {
+    success: true,
+    path: outPath,
+    model: veoModel,
+    bytes: buf.length,
+    mimeType: 'video/mp4'
+  };
+}
+
+const NarrateInfographicSchema = z.object({
+  facts: z.array(z.string()).min(1).describe('Array of researched facts to narrate'),
+  voice_name: z.string().default('Kore').describe('Gemini TTS voice name (default: Kore)'),
+  output_path: z.string().describe('Absolute file path where the .wav narration should be saved')
+});
+
+async function narrateInfographic(args: z.infer<typeof NarrateInfographicSchema>) {
+  const genAI = getGenAI();
+  const ttsModel = process.env.INFOGENIUS_TTS_MODEL || 'gemini-2.5-flash-preview-tts';
+  const textToNarrate = `Read the following facts clearly and professionally: ${args.facts.join('. ')}`;
+
+  const response = await genAI.models.generateContent({
+    model: ttsModel,
+    contents: [{ parts: [{ text: textToNarrate }] }],
+    config: {
+      responseModalities: ['AUDIO'],
+      speechConfig: {
+        voiceConfig: {
+          prebuiltVoiceConfig: { voiceName: args.voice_name }
+        }
+      }
+    }
+  });
+
+  const base64Audio = response.candidates?.[0]?.content?.parts?.[0]?.inlineData?.data;
+  if (!base64Audio) {
+    throw new Error('No audio data returned from Gemini TTS');
+  }
+
+  const rawBuf = Buffer.from(base64Audio, 'base64');
+  const wavBuf = wrapPcmInWavHeader(rawBuf, 24000, 1, 16);
+  const outPath = resolve(args.output_path);
+  const dir = dirname(outPath);
+  if (!existsSync(dir)) mkdirSync(dir, { recursive: true });
+  writeFileSync(outPath, wavBuf);
+
+  return {
+    success: true,
+    path: outPath,
+    model: ttsModel,
+    voiceName: args.voice_name,
+    bytes: wavBuf.length,
+    mimeType: 'audio/wav'
+  };
+}
 
 const GenerateVisualSchema = z.object({
   description: z.string()
@@ -391,16 +631,17 @@ const GenerateVisualSchema = z.object({
     .max(2000, 'Description must not exceed 2000 characters')
     .describe('Direct visual description — use generate_infographic for knowledge-based visuals'),
   style: z.enum(['standard', 'minimalist', 'photorealistic', '3d', 'technical', 'futuristic', 'vintage', 'cartoon', 'glassmorphic', 'premium'])
-    .default('standard')
+    .default('glassmorphic')
     .describe('Visual style preset'),
   label: z.string().optional()
     .describe('Optional text to render on the image')
 });
 
 async function generateVisual(args: z.infer<typeof GenerateVisualSchema>) {
+  const genAI = getGenAI();
   const { description, style: styleName, label } = args;
   const sanitized = description.replace(/[<>]/g, '').trim();
-  const style = STYLES[styleName] || STYLES['standard'];
+  const style = STYLES[styleName] || STYLES['glassmorphic'];
 
   let prompt = `Create a high-quality visual: ${sanitized}\n\nVISUAL STYLE: ${style.instruction}\n\nRender at maximum quality. Sharp detail, no artifacts. All text must be perfectly legible.`;
 
@@ -413,7 +654,7 @@ async function generateVisual(args: z.infer<typeof GenerateVisualSchema>) {
   const response = await genAI.models.generateContent({
     model,
     contents: prompt,
-    config: { responseModalities: ['image', 'text'] }
+    config: { responseModalities: ['IMAGE', 'TEXT'] }
   });
 
   const parts = response.candidates?.[0]?.content?.parts;
@@ -434,10 +675,6 @@ async function generateVisual(args: z.infer<typeof GenerateVisualSchema>) {
   throw new Error('No image data in response');
 }
 
-// ============================================================================
-// TOOL: research_topic — Research only, no image generation
-// ============================================================================
-
 const ResearchTopicSchema = z.object({
   topic: z.string()
     .min(3)
@@ -445,7 +682,10 @@ const ResearchTopicSchema = z.object({
     .describe('Topic to research with web grounding'),
   audience: z.enum(['elementary', 'highschool', 'college', 'expert'])
     .default('college')
-    .describe('Target audience for information density')
+    .describe('Target audience for information density'),
+  style: z.enum(['standard', 'minimalist', 'photorealistic', '3d', 'technical', 'futuristic', 'vintage', 'cartoon', 'glassmorphic', 'premium'])
+    .default('glassmorphic')
+    .describe('Visual style for video prompt synthesis')
 });
 
 // ============================================================================
@@ -456,19 +696,19 @@ server.setRequestHandler(ListToolsRequestSchema, () => ({
   tools: [
     {
       name: 'generate_infographic',
-      description: 'RECOMMENDED: Research-first infographic generation. Researches the topic using Google Search grounding, extracts key facts, then generates a knowledge-rich educational infographic. Use this for any topic where accuracy and educational value matter.',
+      description: 'RECOMMENDED: Research-first infographic generation. Researches the topic using Google Search grounding, extracts key facts + video prompt, then generates a 2K/4K educational infographic.',
       inputSchema: {
         type: 'object',
         properties: {
           topic: {
             type: 'string',
-            description: 'What to research and visualize (e.g., "how blockchain works", "quantum entanglement", "human cardiovascular system")'
+            description: 'What to research and visualize (e.g., "how blockchain works", "quantum entanglement", "Sovereign AI Swarm Architecture")'
           },
           style: {
             type: 'string',
-            description: 'Visual style',
+            description: 'Visual style preset',
             enum: Object.keys(STYLES),
-            default: 'standard'
+            default: 'glassmorphic'
           },
           audience: {
             type: 'string',
@@ -482,17 +722,74 @@ server.setRequestHandler(ListToolsRequestSchema, () => ({
             enum: ['16:9', '1:1', '9:16'],
             default: '16:9'
           },
+          image_size: {
+            type: 'string',
+            description: 'Image resolution tier',
+            enum: ['1K', '2K', '4K'],
+            default: '2K'
+          },
           label: {
             type: 'string',
             description: 'Optional title text for the infographic'
+          },
+          output_path: {
+            type: 'string',
+            description: 'Optional absolute path to write PNG + .vis.provenance.json sidecar'
           }
         },
         required: ['topic']
       }
     },
     {
+      name: 'animate_infographic',
+      description: 'Generate a 7-second 720p motion video (.mp4) from an infographic motion prompt using Veo 3.1 (veo-3.1-fast-generate-preview).',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          prompt: {
+            type: 'string',
+            description: 'Motion prompt (use videoPrompt from research_topic or generate_infographic)'
+          },
+          aspect_ratio: {
+            type: 'string',
+            enum: ['16:9', '9:16'],
+            default: '16:9'
+          },
+          output_path: {
+            type: 'string',
+            description: 'Absolute path where the .mp4 file will be written'
+          }
+        },
+        required: ['prompt', 'output_path']
+      }
+    },
+    {
+      name: 'narrate_infographic',
+      description: 'Generate spoken audio narration (.wav) of extracted infographic facts using Gemini 2.5 Flash TTS (Kore voice).',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          facts: {
+            type: 'array',
+            items: { type: 'string' },
+            description: 'List of facts to narrate'
+          },
+          voice_name: {
+            type: 'string',
+            default: 'Kore',
+            description: 'Prebuilt voice name (default: Kore)'
+          },
+          output_path: {
+            type: 'string',
+            description: 'Absolute path where the .wav file will be written'
+          }
+        },
+        required: ['facts', 'output_path']
+      }
+    },
+    {
       name: 'generate_visual',
-      description: 'Direct visual generation without research. Use for artistic/decorative images where factual accuracy is not the goal. For educational content, use generate_infographic instead.',
+      description: 'Direct visual generation without research. Use for artistic/decorative images where factual accuracy is not the goal.',
       inputSchema: {
         type: 'object',
         properties: {
@@ -504,7 +801,7 @@ server.setRequestHandler(ListToolsRequestSchema, () => ({
             type: 'string',
             description: 'Visual style',
             enum: Object.keys(STYLES),
-            default: 'standard'
+            default: 'glassmorphic'
           },
           label: {
             type: 'string',
@@ -516,7 +813,7 @@ server.setRequestHandler(ListToolsRequestSchema, () => ({
     },
     {
       name: 'research_topic',
-      description: 'Research a topic using Google Search grounding without generating an image. Returns structured facts, visual element suggestions, and source citations. Use this to preview what knowledge will inform an infographic.',
+      description: 'Research a topic using Google Search grounding without generating an image. Returns structured facts, visual element suggestions, video prompt, and source citations.',
       inputSchema: {
         type: 'object',
         properties: {
@@ -529,6 +826,12 @@ server.setRequestHandler(ListToolsRequestSchema, () => ({
             description: 'Target audience for density',
             enum: Object.keys(AUDIENCES),
             default: 'college'
+          },
+          style: {
+            type: 'string',
+            description: 'Visual style for video prompt synthesis',
+            enum: Object.keys(STYLES),
+            default: 'glassmorphic'
           }
         },
         required: ['topic']
@@ -560,13 +863,22 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         const result = await generateInfographic(GenerateInfographicSchema.parse(args));
         return { content: [{ type: 'text', text: JSON.stringify(result, null, 2) }] };
       }
+      case 'animate_infographic': {
+        const result = await animateInfographic(AnimateInfographicSchema.parse(args));
+        return { content: [{ type: 'text', text: JSON.stringify(result, null, 2) }] };
+      }
+      case 'narrate_infographic': {
+        const result = await narrateInfographic(NarrateInfographicSchema.parse(args));
+        return { content: [{ type: 'text', text: JSON.stringify(result, null, 2) }] };
+      }
       case 'generate_visual': {
         const result = await generateVisual(GenerateVisualSchema.parse(args));
         return { content: [{ type: 'text', text: JSON.stringify(result, null, 2) }] };
       }
       case 'research_topic': {
         const parsed = ResearchTopicSchema.parse(args);
-        const result = await researchTopic(genAI, parsed.topic, parsed.audience);
+        const genAI = getGenAI();
+        const result = await researchTopic(genAI, parsed.topic, parsed.audience, parsed.style);
         return { content: [{ type: 'text', text: JSON.stringify(result, null, 2) }] };
       }
       case 'get_styles': {
@@ -592,7 +904,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
 async function main() {
   const transport = new StdioServerTransport();
   await server.connect(transport);
-  console.error('InfoGenius v5.1 — Knowledge-First Visual Intelligence + Premium Glassmorphism');
+  console.error('InfoGenius v5.2 — Knowledge-First Visual Intelligence + Veo 3.1 + Gemini TTS');
 }
 
 main().catch((error) => {

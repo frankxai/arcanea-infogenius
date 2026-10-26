@@ -2,6 +2,8 @@
 
 **Research-grounded infographics and visualizations, delivered as MCP tools.**
 
+> This is the MCP server for **InfoGenius**. The app, the Claude Code skill and the style packs (FrankX, Starlight, GenCreator, Arcanea) live in [frankxai/infogenius](https://github.com/frankxai/infogenius). The package name keeps its `arcanea-` prefix so existing `npx arcanea-infogenius` configs keep working.
+
 Arcanea InfoGenius is a Model Context Protocol (MCP) server that generates rich infographics and visual content using Google Gemini 3 Pro. It combines real-time research grounding with image generation to produce accurate, publication-ready visuals directly from your AI coding environment.
 
 ## Features

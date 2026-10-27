@@ -55,7 +55,7 @@ npm ci && npm run build
 
 **Cursor / Windsurf** — add the same config to your MCP settings file.
 
-### 3. Use it
+### 4. Use it
 
 Ask your AI assistant to:
 
@@ -112,16 +112,9 @@ Generates a styled visual from a descriptive prompt.
 3. **Generate** — Gemini 3 Pro image generation creates the final visual
 4. **Deliver** — The image is returned as a base64-encoded result via MCP
 
-## Part of the Arcanea Ecosystem
+## Part of InfoGenius
 
-Arcanea InfoGenius is one module in the [Arcanea](https://github.com/frankxai/Arcanea) platform — a creative intelligence ecosystem for AI-human co-creation.
-
-| Package | Description |
-|---------|-------------|
-| `@arcanea/core` | Intelligence engine — Guardian routing, voice, design tokens |
-| `@arcanea/cli` | Install Arcanea OS into any AI coding tool |
-| `@arcanea/mcp` | Core MCP server for the Arcanea platform |
-| `arcanea-infogenius` | Visual intelligence MCP server (this package) |
+This server is the MCP component of [InfoGenius](https://github.com/frankxai/infogenius), which also ships a BYOK web studio and a Claude Code skill with four style packs (FrankX, Starlight, GenCreator, Arcanea).
 
 ## License
 
